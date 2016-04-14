@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3eb1c8</color>
+    <color name="colorSecondary">#303F9F</color>
+
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
+
+    <color name="primary_dark">#388E3C</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="primary">#4CAF50</color>
+    <color name="accent">#FFEB3B</color>
+
+    <color name="cardFeaturedContent">#E0E0E0</color>
+
+    <color name="colorBlue">#2480c2</color>
+    <color name="colorOrange">#facb0c</color>
+    <color name="colorLightBlue">#00aaeb</color>
+</resources>

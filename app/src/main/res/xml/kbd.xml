@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.50%p"
+    android:keyHeight="10%p">
+
+    <Row>
+        <Key android:codes="1000"    android:keyLabel="ሀ" android:keyEdgeFlags="left"  android:popupKeyboard="@xml/popup" android:popupCharacters="ሀሁሂሃሄህሆ" />
+        <Key android:codes="1010"    android:keyLabel="ለ"  android:popupKeyboard="@xml/popup" android:popupCharacters="ለሉሊላሌልሎ"/>
+        <Key android:codes="1020"    android:keyLabel="ሐ"  android:popupKeyboard="@xml/popup" android:popupCharacters="ሐሑሒሓሔሕሖ"/>
+        <Key android:codes="1030"    android:keyLabel="መ"  android:popupKeyboard="@xml/popup" android:popupCharacters="መሙሚማሜምሞ"/>
+        <Key android:codes="1040"    android:keyLabel="ሠ" android:popupKeyboard="@xml/popup" android:popupCharacters="ሠሡሢሣሤሥሦ"/>
+        <Key android:codes="1050"    android:keyLabel="ረ" android:popupKeyboard="@xml/popup" android:popupCharacters="ረሩሪራሬርሮ"/>
+        <Key android:codes="1060"    android:keyLabel="ሰ" android:popupKeyboard="@xml/popup" android:popupCharacters="ሰሱሲሳሴስሶ"/>
+        <Key android:codes="1070"    android:keyLabel="ሸ" android:popupKeyboard="@xml/popup" android:popupCharacters="ሸሹሺሻሼሽሾ"/>
+        <Key android:codes="1080"    android:keyLabel="ቀ" android:popupKeyboard="@xml/popup" android:popupCharacters="ቀቁቂቃቄቅቆ"/>
+        <Key android:codes="1090"    android:keyLabel="በ" android:popupKeyboard="@xml/popup" android:popupCharacters="በቡቢባቤብቦ"/>
+        <Key android:codes="1100"    android:keyLabel="ቨ" android:popupKeyboard="@xml/popup" android:popupCharacters="ቨቩቪቫቬቭቮ"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="1110"    android:keyLabel="ተ" android:keyEdgeFlags="left" android:popupKeyboard="@xml/popup" android:popupCharacters="ተቱቲታቴትቶ" />
+        <Key android:codes="1120"    android:keyLabel="ቸ" android:popupKeyboard="@xml/popup" android:popupCharacters="ቸቹቺቻቼችቾ"/>
+        <Key android:codes="1130"    android:keyLabel="ኀ" android:popupKeyboard="@xml/popup" android:popupCharacters="ኀኁኂኃኄኅኆ"/>
+        <Key android:codes="1140"    android:keyLabel="ነ" android:popupKeyboard="@xml/popup" android:popupCharacters="ነኑኒናኔንኖ"/>
+        <Key android:codes="1150"    android:keyLabel="ኘ" android:popupKeyboard="@xml/popup" android:popupCharacters="ኘኙኚኛኜኝኞ"/>
+        <Key android:codes="1160"    android:keyLabel="አ" android:popupKeyboard="@xml/popup" android:popupCharacters="አኡኢኣኤእኦ"/>
+        <Key android:codes="1170"    android:keyLabel="ከ" android:popupKeyboard="@xml/popup" android:popupCharacters="ከኩኪካኬክኮ"/>
+        <Key android:codes="1180"    android:keyLabel="ኸ" android:popupKeyboard="@xml/popup" android:popupCharacters="ኸኹኺኻኼኽኾ"/>
+        <Key android:codes="1190"    android:keyLabel="ወ" android:popupKeyboard="@xml/popup" android:popupCharacters="ወዉዊዋዌውዎ"/>
+        <Key android:codes="1200"    android:keyLabel="ዐ" android:popupKeyboard="@xml/popup" android:popupCharacters="ዐዑዒዓዔዕዖ"/>
+        <Key android:codes="1210"    android:keyLabel="ዘ" android:popupKeyboard="@xml/popup" android:popupCharacters="ዘዙዚዛዜዝዞ"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="1220"    android:keyLabel="ዠ" android:keyEdgeFlags="left" android:popupKeyboard="@xml/popup" android:popupCharacters="ዠዡዢዣዤዥዦ" />
+        <Key android:codes="1230"    android:keyLabel="የ" android:popupKeyboard="@xml/popup" android:popupCharacters="የዩዪያዬይዮ"/>
+        <Key android:codes="1240"    android:keyLabel="ደ" android:popupKeyboard="@xml/popup" android:popupCharacters="ደዱዲዳዴድዶ"/>
+        <Key android:codes="1250"    android:keyLabel="ጀ" android:popupKeyboard="@xml/popup" android:popupCharacters="ጀጁጂጃጄጅጆ"/>
+        <Key android:codes="1260"    android:keyLabel="ገ" android:popupKeyboard="@xml/popup" android:popupCharacters="ገጉጊጋጌግጎ"/>
+        <Key android:codes="1270"    android:keyLabel="ጠ" android:popupKeyboard="@xml/popup" android:popupCharacters="ጠጡጢጣጤጥጦ" />
+        <Key android:codes="1280"    android:keyLabel="ጨ" android:popupKeyboard="@xml/popup" android:popupCharacters="ጨጩጪጫጬጭጮ"/>
+        <Key android:codes="1290"    android:keyLabel="ጰ" android:popupKeyboard="@xml/popup" android:popupCharacters="ጰጱጲጳጴጵጶ"/>
+        <Key android:codes="1300"    android:keyLabel="ጸ" android:popupKeyboard="@xml/popup" android:popupCharacters="ጸጹጺጻጼጽጾ"/>
+        <Key android:codes="1310"    android:keyLabel="ፀ" />
+        <Key android:codes="1320"    android:keyLabel="ፈ" android:popupKeyboard="@xml/popup" android:popupCharacters="ፈፉፊፋፌፍፎ"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="1330"    android:keyLabel="ፐ" android:keyEdgeFlags="left" android:popupKeyboard="@xml/popup" android:popupCharacters="ፐፑፒፓፔፕፖ"/>
+        <Key android:codes="1400"    android:keyLabel="፡" />
+        <Key android:codes="56"    android:keyLabel="" android:keyWidth="30%p"  />
+        <Key android:codes="-5"    android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true" android:horizontalGap="3.25%p" />
+        <Key android:codes="55002" android:keyIcon="@drawable/sym_keyboard_left" android:isRepeatable="true"  android:horizontalGap="1.25%p" />
+        <Key android:codes="55003" android:keyIcon="@drawable/sym_keyboard_right" android:isRepeatable="true" />
+    </Row>
+
+</Keyboard>

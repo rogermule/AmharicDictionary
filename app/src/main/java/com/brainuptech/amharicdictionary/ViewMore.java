@@ -1,5 +1,6 @@
 package com.brainuptech.amharicdictionary;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 
@@ -22,7 +24,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
     TextView tv_word1, tv_word2;
     MyDatabase myDatabase;
     TextToSpeech tts;
-    ImageButton btn_tts;
+    ImageButton btn_tts, btn_copy;
 
     String text_tts;
     @Override
@@ -40,6 +42,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         text_tts = "";
         tts = new TextToSpeech(this,this);
         btn_tts = (ImageButton) findViewById(R.id.viewmore_tts);
+        btn_copy = (ImageButton) findViewById(R.id.ib_copy);
 
         myDatabase = new MyDatabase(this);
         final DictionaryEntitty dict =  myDatabase.getDetail(keyWord, lang);
@@ -47,14 +50,30 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         tv_word1.setText(keyWord);
         tv_word2.setText(dict.getDefinition());
 
+        tv_word2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                copyToClipboard(ViewMore.this,dict.getDefinition());
+                Toast.makeText(getApplicationContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
         btn_tts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lang.equals("amh"))
+                if (lang.equals("amh"))
                     text_tts = dict.getDefinition();
                 else
                     text_tts = keyWord;
                 speakOut();
+            }
+        });
+
+        btn_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copyToClipboard(ViewMore.this,keyWord);
+                Toast.makeText(getApplicationContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -76,6 +95,30 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
             }
         } else {
             Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+
+    @SuppressWarnings("deprecation")
+    public boolean copyToClipboard(Context context, String text) {
+        try {
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if (sdk < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context
+                        .getSystemService(context.CLIPBOARD_SERVICE);
+                clipboard.setText(text);
+            } else {
+                android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context
+                        .getSystemService(context.CLIPBOARD_SERVICE);
+                android.content.ClipData clip = android.content.ClipData
+                        .newPlainText(
+                                context.getResources().getString(
+                                        R.string.app_name), text);
+                clipboard.setPrimaryClip(clip);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 

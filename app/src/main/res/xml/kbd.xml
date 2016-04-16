@@ -3,6 +3,17 @@
     android:keyWidth="12.50%p"
     android:keyHeight="8.5%p">
 
+    <Row
+        android:keyWidth="14.25%p">
+        <Key android:codes="1"    android:keyLabel="" android:keyEdgeFlags="left"/>
+        <Key android:codes="2"    android:keyLabel="" />
+        <Key android:codes="3"    android:keyLabel="" />
+        <Key android:codes="4"    android:keyLabel=""  />
+        <Key android:codes="5"    android:keyLabel=""/>
+        <Key android:codes="6"    android:keyLabel="" />
+        <Key android:codes="7"    android:keyLabel="" />
+    </Row>
+
     <Row>
         <Key android:codes="1000"    android:keyLabel="ሀ" android:keyEdgeFlags="left"  android:popupKeyboard="@xml/popup" android:popupCharacters="ሀሁሂሃሄህሆ" />
         <Key android:codes="1010"    android:keyLabel="ለ"  android:popupKeyboard="@xml/popup" android:popupCharacters="ለሉሊላሌልሎ"/>

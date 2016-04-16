@@ -68,6 +68,12 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        if(Frag_Amharic.mCustomKeyboard != null) {
+            if (Frag_Amharic.mCustomKeyboard.isCustomKeyboardVisible())
+                Frag_Amharic.mCustomKeyboard.hideCustomKeyboard();
+        }
+        else this.finish();
     }
 
     @Override
@@ -155,4 +161,6 @@ public class MainActivity extends AppCompatActivity
             return mFragmentTitleList.get(position);
         }
     }
+
+
 }

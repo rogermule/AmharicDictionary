@@ -99,6 +99,24 @@
 
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="2dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                app:cardUseCompatPadding="true"
+                >
+         <WebView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/webview_detail"
+             >
+
+         </WebView>
+
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

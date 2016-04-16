@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +26,12 @@ import java.util.ArrayList;
 public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextListener{
 
     private ListView lv_amharic;
-    private EditText ed_amharic;
     private SearchView mSearchView;
     MyDatabase myDB;
 
-    public CustomKeyboard3 mCustomKeyboard;
+    EditText inputSearch;
+    MyReportListAdapter adapter;
+    public static CustomKeyboard mCustomKeyboard;
 
     public Frag_Amharic() {
         // Required empty public constructor
@@ -45,13 +48,14 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_amharic_list, container, false);
 
-        mSearchView = (SearchView) view.findViewById(R.id.search_view_amharic);
-        ed_amharic = (EditText) view.findViewById(R.id.ed_amharic);
-
-        mCustomKeyboard= new CustomKeyboard3(getActivity(), R.id.keyboardview, R.xml.kbd );
-        mCustomKeyboard.registerEditText(ed_amharic);
-
+//        mSearchView = (SearchView) view.findViewById(R.id.search_view_amharic);
+        inputSearch = (EditText) view.findViewById(R.id.inputSearch_amh);
         lv_amharic = (ListView) view.findViewById(R.id.lv_amharic);
+
+        mCustomKeyboard= new CustomKeyboard(getActivity(),view, R.id.keyboardview, R.xml.kbd );
+        mCustomKeyboard.registerEditText(inputSearch);
+
+
         lv_amharic.setTextFilterEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -60,9 +64,33 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
 
         myDB = new MyDatabase(getActivity());
         ArrayList<DictionaryEntitty> wordlist = myDB.getWordsAmharic();
-        lv_amharic.setAdapter(new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist));
+        adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
+        lv_amharic.setAdapter(adapter);
         lv_amharic.setTextFilterEnabled(true);
-        setupSearchView();
+
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                Frag_Amharic.this.adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        //setupSearchView();
 
         return view;
     }

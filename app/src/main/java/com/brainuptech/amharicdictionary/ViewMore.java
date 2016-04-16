@@ -32,7 +32,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         setSupportActionBar((Toolbar) findViewById(R.id.detail_toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final String keyWord = getIntent().getExtras().getString("word1");
-        String lang = getIntent().getExtras().getString("lang");
+        final String lang = getIntent().getExtras().getString("lang");
 
         tv_word1 = (TextView) findViewById(R.id.detail_word1);
         tv_word2 = (TextView) findViewById(R.id.detail_word2);
@@ -42,7 +42,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         btn_tts = (ImageButton) findViewById(R.id.viewmore_tts);
 
         myDatabase = new MyDatabase(this);
-        DictionaryEntitty dict =  myDatabase.getDetail(keyWord, lang);
+        final DictionaryEntitty dict =  myDatabase.getDetail(keyWord, lang);
 
         tv_word1.setText(keyWord);
         tv_word2.setText(dict.getDefinition());
@@ -50,7 +50,10 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         btn_tts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                text_tts = keyWord;
+                if(lang.equals("amh"))
+                    text_tts = dict.getDefinition();
+                else
+                    text_tts = keyWord;
                 speakOut();
             }
         });

@@ -6,12 +6,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -27,7 +30,10 @@ import java.util.Locale;
 public class Frag_English extends Fragment implements SearchView.OnQueryTextListener{
 
     private ListView lv_english;
-    private SearchView mSearchView;
+//    private SearchView mSearchView;
+
+    public EditText inputeSearch;
+    MyReportListAdapter adapter;
 
     MyDatabase myDB;
     public Frag_English() {
@@ -46,7 +52,8 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_english_list, container, false);
 
-        mSearchView = (SearchView) view.findViewById(R.id.search_view);
+        inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
+//        mSearchView = (SearchView) view.findViewById(R.id.search_view);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
         lv_english.setTextFilterEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -55,22 +62,41 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
 
         myDB = new MyDatabase(getActivity());
         ArrayList<DictionaryEntitty> wordlist = myDB.getWords();
-        lv_english.setAdapter(new MyReportListAdapter(getContext(), wordlist));
+        adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
+        lv_english.setAdapter(adapter);
         lv_english.setTextFilterEnabled(true);
 
-        setupSearchView();
+        inputeSearch.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                Frag_English.this.adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
         return view;
     }
 
 
 
-    private void setupSearchView() {
+ /*   private void setupSearchView() {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setQueryHint("Search Here");
 
-    }
+    }*/
 
     @Override
     public void onDestroy() {
@@ -151,8 +177,11 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             btn_tts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    myDB.getFavorite();
                     text_tts = title;
                     speakOut();
+
                 }
             });
 

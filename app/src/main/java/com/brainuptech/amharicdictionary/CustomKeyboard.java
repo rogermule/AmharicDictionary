@@ -16,14 +16,12 @@
  * If you use this software in a product, an acknowledgment in the product
  * documentation would be appreciated but is not required.
  */
-
 package com.brainuptech.amharicdictionary;
 
 import android.app.Activity;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
-import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -34,17 +32,18 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 
-public class CustomKeyboard {
+class CustomKeyboard {
 
     private KeyboardView mKeyboardView;
     private Activity     mHostActivity;
     public static String[] AMHARIC_WORDS= {"ሀ","ለ","ሐ","መ","ሠ","ረ",
             "ሰ","ሸ","ቀ","በ","ቨ","ተ","ቸ","ኀ","ነ","ኘ","አ","ከ","ኸ","ወ","ዐ","ዘ","ዠ","የ","ደ","ጀ","ገ","ጠ","ጨ","ጰ","ጸ","ፀ","ፈ","ፐ",":"};
 
-    private OnKeyboardActionListener mOnKeyboardActionListener = new OnKeyboardActionListener() {
+    EditText edittext;
+
+    public OnKeyboardActionListener mOnKeyboardActionListener = new OnKeyboardActionListener() {
 
         public final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
         public final static int CodeCancel   = -3; // Keyboard.KEYCODE_CANCEL
@@ -56,12 +55,17 @@ public class CustomKeyboard {
         public final static int CodeNext     = 55005;
         public final static int CodeClear    = 55006;
 
-        @Override public void onKey(int primaryCode, int[] keyCodes) {
+        @Override
+        public void onKey(int primaryCode, int[] keyCodes) {
             // NOTE We can say '<Key android:codes="49,50" ... >' in the xml file; all codes come in keyCodes, the first in this list in primaryCode
             // Get the EditText and its Editable
+/*
+
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             if( focusCurrent==null || focusCurrent.getClass()!=EditText.class ) return;
-            EditText edittext = (EditText) focusCurrent;
+            edittext = (EditText) focusCurrent;
+*/
+            if(!edittext.hasFocus()) return;
             Editable editable = edittext.getText();
             int start = edittext.getSelectionStart();
             // Apply the key to the edittext
@@ -213,14 +217,15 @@ public class CustomKeyboard {
     };
 
 
-    public CustomKeyboard(Activity host, int viewid, int layoutid) {
+    public CustomKeyboard(Activity host, View view, int viewid, int layoutid) {
         mHostActivity= host;
-        mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
+        mKeyboardView= (KeyboardView)view.findViewById(viewid);
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layoutid));
         mKeyboardView.setPreviewEnabled(false); // NOTE Do not show the preview balloons
         mKeyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);
         // Hide the standard keyboard initially
         mHostActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
 
     public boolean isCustomKeyboardVisible() {
@@ -239,10 +244,10 @@ public class CustomKeyboard {
     }
 
 
-    public void registerEditText(int resid) {
-        // Find the EditText 'resid'
-        SearchView edittext= (SearchView)mHostActivity.findViewById(resid);
+    public void registerEditText(EditText edittext ) {
         // Make the custom keyboard appear
+        this.edittext = edittext;
+
         edittext.setOnFocusChangeListener(new OnFocusChangeListener() {
             // NOTE By setting the on focus listener, we can show the custom keyboard when the edit box gets focus, but also hide it when the edit box loses focus
             @Override public void onFocusChange(View v, boolean hasFocus) {
@@ -259,11 +264,8 @@ public class CustomKeyboard {
         // NOTE There is also an easy way: 'edittext.setInputType(InputType.TYPE_NULL)' (but you will not have a cursor, and no 'edittext.setCursorVisible(true)' doesn't work )
         edittext.setOnTouchListener(new OnTouchListener() {
             @Override public boolean onTouch(View v, MotionEvent event) {
-                SearchView edittext = (SearchView) v;
-                int inType = 0;       // Backup the input type
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    inType = edittext.getInputType();
-                }
+                EditText edittext = (EditText) v;
+                int inType = edittext.getInputType();       // Backup the input type
                 edittext.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
                 edittext.onTouchEvent(event);               // Call native handler
                 edittext.setInputType(inType);              // Restore input type
@@ -271,9 +273,7 @@ public class CustomKeyboard {
             }
         });
         // Disable spell check (hex strings look like words to Android)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            edittext.setInputType(edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        }
+        edittext.setInputType(edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 
 }

@@ -126,6 +126,20 @@ public class MyDatabase extends SQLiteAssetHelper {
         return dict;
     }
 
+    public DictionaryEntitty getFavorite(){
+        SQLiteDatabase db = getReadableDatabase();
+        DictionaryEntitty dict = new DictionaryEntitty();
+
+        String DB_Table = "FavoriteDB";
+        Cursor cur = db.rawQuery("select * from " + DB_Table, null);
+        Log.i("Test", cur.getCount()+"");
+        cur.moveToFirst();
+        dict.setWord1(cur.getString(cur.getColumnIndex("RecNo")));
+        dict.setDefinition(cur.getString(cur.getColumnIndex("word_id")));
+        db.close();
+        return dict;
+    }
+
     public DictionaryEntitty getAmharicDetail(String word){
         SQLiteDatabase db = getReadableDatabase();
         DictionaryEntitty dict = new DictionaryEntitty();

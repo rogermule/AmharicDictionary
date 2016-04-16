@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
         collapsingToolbarLayout.setTitle("Amharic Dictionary");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
-
     }
 
 
@@ -73,7 +72,8 @@ public class MainActivity extends AppCompatActivity
             if (Frag_Amharic.mCustomKeyboard.isCustomKeyboardVisible())
                 Frag_Amharic.mCustomKeyboard.hideCustomKeyboard();
         }
-        else this.finish();
+        else
+            this.finish();
     }
 
     @Override

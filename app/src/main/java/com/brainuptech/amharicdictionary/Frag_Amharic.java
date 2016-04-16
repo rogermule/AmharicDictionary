@@ -48,7 +48,6 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_amharic_list, container, false);
 
-//        mSearchView = (SearchView) view.findViewById(R.id.search_view_amharic);
         inputSearch = (EditText) view.findViewById(R.id.inputSearch_amh);
         lv_amharic = (ListView) view.findViewById(R.id.lv_amharic);
 

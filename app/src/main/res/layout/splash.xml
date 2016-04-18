@@ -12,19 +12,24 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/icon_dic"
+            android:layout_marginBottom="10dp"/>
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="35dp"
-        android:text="Amharic Dictionray"/>
+        android:textSize="32dp"
+        android:text="Amharic Dictionary"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="25dp"
-            android:text="BrainUp Tech"/>
+            android:textSize="20dp"
+            android:text="By BrainUp Tech"/>
 
     </LinearLayout>
 </LinearLayout>

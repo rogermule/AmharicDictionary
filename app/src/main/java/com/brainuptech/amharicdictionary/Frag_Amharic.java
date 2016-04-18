@@ -2,7 +2,6 @@ package com.brainuptech.amharicdictionary;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextListener{
 
     private ListView lv_amharic;
-    private SearchView mSearchView;
     MyDatabase myDB;
 
     EditText inputSearch;
@@ -54,15 +52,10 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
         mCustomKeyboard= new CustomKeyboard(getActivity(),view, R.id.keyboardview, R.xml.kbd );
         mCustomKeyboard.registerEditText(inputSearch);
 
-
-        lv_amharic.setTextFilterEnabled(true);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            lv_amharic.setNestedScrollingEnabled(true);
-        }
+        inputSearch.clearFocus();
 
         myDB = new MyDatabase(getActivity());
-        ArrayList<DictionaryEntitty> wordlist = myDB.getWordsAmharic();
+        ArrayList<DictionaryEntitty> wordlist = myDB.getWords("amh");
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_amharic.setAdapter(adapter);
         lv_amharic.setTextFilterEnabled(true);
@@ -89,17 +82,13 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
             }
         });
 
-        //setupSearchView();
-
         return view;
     }
 
-    private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false);
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setQueryHint("እዚህ ፈልግ");
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 
@@ -162,7 +151,7 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
 
             final String title = wordlist.get(position).getWord1();
             final String definition = wordlist.get(position).getDefinition();
-
+            final int id = wordlist.get(position).getId();
             currentNum = position;
             tv_title.setText(title);
             tv_definition.setText(definition);
@@ -173,7 +162,7 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
                     Intent intent = new Intent(getActivity(),ViewMore.class);
                     Bundle b = new Bundle();
                     b.putString("lang","amh");
-                    b.putString("word1",title);
+                    b.putInt("id", id);
                     intent.putExtras(b);
                     startActivity(intent);
                 }

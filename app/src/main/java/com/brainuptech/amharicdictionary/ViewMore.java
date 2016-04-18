@@ -33,7 +33,8 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         setContentView(R.layout.view_more);
         setSupportActionBar((Toolbar) findViewById(R.id.detail_toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final String keyWord = getIntent().getExtras().getString("word1");
+//        final String keyWord = getIntent().getExtras().getString("word1");
+        final int id = getIntent().getExtras().getInt("id");
         final String lang = getIntent().getExtras().getString("lang");
 
         tv_word1 = (TextView) findViewById(R.id.detail_word1);
@@ -45,11 +46,12 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         btn_copy = (ImageButton) findViewById(R.id.ib_copy);
 
         myDatabase = new MyDatabase(this);
-        final DictionaryEntitty dict =  myDatabase.getDetail(keyWord, lang);
-
-        tv_word1.setText(keyWord);
-        tv_word2.setText(dict.getDefinition());
-
+        Log.i("Test", "id: "+ id + "\nlang: "+lang);
+        final DictionaryEntitty dict =  myDatabase.getDetail(lang,id);
+        if(dict!=null) {
+            tv_word1.setText(dict.getWord1());
+            tv_word2.setText(dict.getDefinition());
+        }
         tv_word2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -64,7 +66,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
                 if (lang.equals("amh"))
                     text_tts = dict.getDefinition();
                 else
-                    text_tts = keyWord;
+                    text_tts = dict.getWord1();
                 speakOut();
             }
         });
@@ -72,7 +74,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
         btn_copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                copyToClipboard(ViewMore.this,keyWord);
+                copyToClipboard(ViewMore.this,dict.getWord1());
                 Toast.makeText(getApplicationContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
             }
         });

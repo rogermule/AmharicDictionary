@@ -2,7 +2,6 @@ package com.brainuptech.amharicdictionary;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
@@ -53,15 +52,12 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
         View view = inflater.inflate(R.layout.fragment_english_list, container, false);
 
         inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
-//        mSearchView = (SearchView) view.findViewById(R.id.search_view);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
         lv_english.setTextFilterEnabled(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            lv_english.setNestedScrollingEnabled(true);
-        }
+
 
         myDB = new MyDatabase(getActivity());
-        ArrayList<DictionaryEntitty> wordlist = myDB.getWords();
+        ArrayList<DictionaryEntitty> wordlist = myDB.getWords("eng");
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_english.setAdapter(adapter);
         lv_english.setTextFilterEnabled(true);
@@ -90,13 +86,6 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
     }
 
 
-
- /*   private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false);
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setQueryHint("Search Here");
-
-    }*/
 
     @Override
     public void onDestroy() {
@@ -169,7 +158,7 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
 
             final String title = wordlist.get(position).getWord1();
             final String definition = wordlist.get(position).getDefinition();
-
+            final int id = wordlist.get(position).getId();
             currentNum = position;
             tv_title.setText(title);
             tv_definition.setText(definition);
@@ -177,11 +166,8 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             btn_tts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    myDB.getFavorite();
                     text_tts = title;
                     speakOut();
-
                 }
             });
 
@@ -191,7 +177,7 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
                     Intent intent = new Intent(getActivity(),ViewMore.class);
                     Bundle b = new Bundle();
                     b.putString("lang","eng");
-                    b.putString("word1",title);
+                    b.putInt("id",id);
                     intent.putExtras(b);
                     startActivity(intent);
                 }

@@ -17,7 +17,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(2000);
                 } catch(InterruptedException e){
                 } finally {
                     getNextActivity();

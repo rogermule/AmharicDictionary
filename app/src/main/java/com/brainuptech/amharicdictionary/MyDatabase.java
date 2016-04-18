@@ -64,10 +64,17 @@ public class MyDatabase extends SQLiteAssetHelper {
         return found;
     }
 
-    public ArrayList<DictionaryEntitty> getWordsAmharic(){
-        String DB_Table = "EnglishDB";
+    public ArrayList<DictionaryEntitty> getWords(String lang){
+
+        String DB_Table = "";
+        if(lang.equals("amh")){
+            DB_Table = "AmharicDB";
+        }
+        else if(lang.equals("eng")){
+            DB_Table = "EnglishDB";
+        }
         SQLiteDatabase db = getReadableDatabase();
-        String[] column = {"word1", "word2"};
+        String[] column = {"_id","word1", "word2"};
 
         ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
         Cursor c = db.query(DB_Table, column, null, null, null,null,null);
@@ -77,8 +84,9 @@ public class MyDatabase extends SQLiteAssetHelper {
             for(int i=0;i<c.getCount();i++){
                 c.moveToPosition(i);
                 DictionaryEntitty dis = new DictionaryEntitty();
-                dis.setWord1(c.getString(c.getColumnIndex("word2")));
-                dis.setDefinition(c.getString(c.getColumnIndex("word1")));
+                dis.setId(Integer.parseInt(c.getString(c.getColumnIndex("_id"))));
+                dis.setWord1(c.getString(c.getColumnIndex("word1")));
+                dis.setDefinition(c.getString(c.getColumnIndex("word2")));
 
                 found.add(dis);
             }
@@ -111,33 +119,29 @@ public class MyDatabase extends SQLiteAssetHelper {
         return null;
     }
 
-    public DictionaryEntitty getEnglishDetail(String word1){
+    public DictionaryEntitty getDetail(String lang, int id){
+        String db_table = "";
+        if(lang.equals("amh")){
+            db_table = "AmharicDB";
+        }
+        else if(lang.equals("eng")){
+            db_table = "EnglishDB";
+        }
+
         SQLiteDatabase db = getReadableDatabase();
         DictionaryEntitty dict = new DictionaryEntitty();
 
-        String DB_Table = "EnglishDB";
-        Cursor cur = db.rawQuery("select * from " + DB_Table + " where word1='" + word1+"'", null);
+        Cursor cur = db.rawQuery("select * from " + db_table + " where _id='" + id+"'", null);
         Log.i("Test", cur.getCount()+"");
-        Log.i("Test", word1);
-        cur.moveToFirst();
-        dict.setWord1(word1);
-        dict.setDefinition(cur.getString(cur.getColumnIndex("word2")));
-        db.close();
-        return dict;
-    }
-
-    public DictionaryEntitty getFavorite(){
-        SQLiteDatabase db = getReadableDatabase();
-        DictionaryEntitty dict = new DictionaryEntitty();
-
-        String DB_Table = "FavoriteDB";
-        Cursor cur = db.rawQuery("select * from " + DB_Table, null);
-        Log.i("Test", cur.getCount()+"");
-        cur.moveToFirst();
-        dict.setWord1(cur.getString(cur.getColumnIndex("RecNo")));
-        dict.setDefinition(cur.getString(cur.getColumnIndex("word_id")));
-        db.close();
-        return dict;
+        if(cur.getCount()>0) {
+            cur.moveToFirst();
+            dict.setId(id);
+            dict.setWord1(cur.getString(cur.getColumnIndex("word1")));
+            dict.setDefinition(cur.getString(cur.getColumnIndex("word2")));
+            db.close();
+            return dict;
+        }
+        return null;
     }
 
     public DictionaryEntitty getAmharicDetail(String word){

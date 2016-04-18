@@ -4,24 +4,24 @@ package com.brainuptech.amharicdictionary.Entities;
  * Created by Roger on 3/29/2016.
  */
 public class DictionaryEntitty {
-    private String id;
+    private int id;
     private String word1;
     private String definition;
 
     public DictionaryEntitty() {
     }
 
-    public DictionaryEntitty(String id, String word1, String definition) {
+    public DictionaryEntitty(int id, String word1, String definition) {
         this.id = id;
         this.word1 = word1;
         this.definition = definition;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

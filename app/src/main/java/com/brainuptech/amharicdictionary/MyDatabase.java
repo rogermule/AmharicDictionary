@@ -19,6 +19,7 @@ public class MyDatabase extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "english.sqlite";
     private static final int DATABASE_VERSION = 1;
+    public static final String[] column = {"_id "," word1 ", " word2"};
 
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -65,6 +66,7 @@ public class MyDatabase extends SQLiteAssetHelper {
     }
 
     public ArrayList<DictionaryEntitty> getWords(String lang){
+        SQLiteDatabase db = getReadableDatabase();
 
         String DB_Table = "";
         if(lang.equals("amh")){
@@ -73,21 +75,24 @@ public class MyDatabase extends SQLiteAssetHelper {
         else if(lang.equals("eng")){
             DB_Table = "EnglishDB";
         }
-        SQLiteDatabase db = getReadableDatabase();
-        String[] column = {"_id","word1", "word2"};
+
+        String[] column2 = {"*"};
 
         ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
-        Cursor c = db.query(DB_Table, column, null, null, null,null,null);
+        Cursor c = db.query(DB_Table,column2 , null, null, null,null,null);
+        Log.i("Test", "row count: "+ c.getCount() + " \n Column count: "+c.getColumnCount());
 
         if(c.getCount()>0){
             c.moveToFirst();
             for(int i=0;i<c.getCount();i++){
                 c.moveToPosition(i);
                 DictionaryEntitty dis = new DictionaryEntitty();
-                dis.setId(Integer.parseInt(c.getString(c.getColumnIndex("_id"))));
+  /*              dis.setId(Integer.parseInt(c.getString(c.getColumnIndex("_id"))));
                 dis.setWord1(c.getString(c.getColumnIndex("word1")));
-                dis.setDefinition(c.getString(c.getColumnIndex("word2")));
-
+                dis.setDefinition(c.getString(c.getColumnIndex("word2")));*/
+              dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                dis.setWord1(c.getString(c.getColumnIndex(c.getColumnName(1))));
+                dis.setDefinition(c.getString(c.getColumnIndex(c.getColumnName(2))));
                 found.add(dis);
             }
         }
@@ -131,18 +136,51 @@ public class MyDatabase extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         DictionaryEntitty dict = new DictionaryEntitty();
 
-        Cursor cur = db.rawQuery("select * from " + db_table + " where _id='" + id+"'", null);
+        Cursor cur = db.rawQuery("select * from " + db_table + " where "+column[0]+ "='" + id+"'", null);
         Log.i("Test", cur.getCount()+"");
         if(cur.getCount()>0) {
             cur.moveToFirst();
             dict.setId(id);
             dict.setWord1(cur.getString(cur.getColumnIndex("word1")));
             dict.setDefinition(cur.getString(cur.getColumnIndex("word2")));
+            dict.setWord1(cur.getString(cur.getColumnIndex(cur.getColumnName(1))));
+            dict.setDefinition(cur.getString(cur.getColumnIndex(cur.getColumnName(2))));
             db.close();
             return dict;
         }
         return null;
     }
+
+
+
+     public DictionaryEntitty getDetail2(String lang, int id){
+        String db_table = "";
+        if(lang.equals("amh")){
+            db_table = "AmharicDB";
+        }
+        else if(lang.equals("eng")){
+            db_table = "EnglishDB";
+        }
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor c = db.rawQuery("select * from " + db_table, null);
+
+         c.moveToFirst();
+         for(int i=0;i<c.getCount();i++){
+             c.moveToPosition(i);
+             String word_id  = c.getString(c.getColumnIndex(c.getColumnName(0)));
+             if(word_id.equals(id)){
+                 DictionaryEntitty dict = new DictionaryEntitty();
+                 dict.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                 dict.setWord1(c.getString(c.getColumnIndex(c.getColumnName(1))));
+                 dict.setDefinition(c.getString(c.getColumnIndex(c.getColumnName(2))));
+                 return dict;
+             }
+         }
+        return null;
+    }
+
 
     public DictionaryEntitty getAmharicDetail(String word){
         SQLiteDatabase db = getReadableDatabase();

@@ -3,10 +3,12 @@ package com.brainuptech.amharicdictionary;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextListener{
 
@@ -108,18 +112,22 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
     }
 
 
-    public class MyReportListAdapter extends BaseAdapter implements Filterable
+    public class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
     {
         ArrayList<DictionaryEntitty> wordlist;
         public int currentNum = 0;
-
+        private ImageButton btn_tts;
+        private TextToSpeech tts;
         public Context context;
         public ArrayList<DictionaryEntitty> orig;
+        String text_tts;
 
         public MyReportListAdapter(Context context,ArrayList<DictionaryEntitty> wordlist)
         {
             this.context = context;
             this.wordlist = wordlist;
+            tts = new TextToSpeech(context,this);
+            text_tts = "";
         }
 
         @Override
@@ -147,6 +155,7 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
 
             TextView tv_title = (TextView) convertView.findViewById(R.id.word_title);
             TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
+            btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
 
 
             final String title = wordlist.get(position).getWord1();
@@ -155,6 +164,14 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
             currentNum = position;
             tv_title.setText(title);
             tv_definition.setText(definition);
+
+            btn_tts.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    text_tts = definition;
+                    speakOut();
+                }
+            });
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -203,6 +220,26 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
             };
         }
 
+        @Override
+        public void onInit(int status) {
+            if (status == TextToSpeech.SUCCESS) {
+
+                int result = tts.setLanguage(Locale.US);
+                if (result == TextToSpeech.LANG_MISSING_DATA
+                        || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "This Language is not supported");
+                } else {
+                    btn_tts.setEnabled(true);
+                    speakOut();
+                }
+            } else {
+                Log.e("TTS", "Initilization Failed!");
+            }
+        }
+
+        private void speakOut() {
+            tts.speak(text_tts, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
 }

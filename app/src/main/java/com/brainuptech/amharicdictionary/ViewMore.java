@@ -127,6 +127,7 @@ public class ViewMore extends AppCompatActivity implements TextToSpeech.OnInitLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        tts.stop();
         finish();
     }
 }

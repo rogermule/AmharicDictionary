@@ -29,9 +29,8 @@ import java.util.Locale;
 public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextListener{
 
     private ListView lv_amharic;
-    MyDatabase myDB;
 
-    EditText inputSearch;
+    public static EditText inputSearch;
     MyReportListAdapter adapter;
     public static CustomKeyboard mCustomKeyboard;
 
@@ -58,12 +57,10 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
 
         inputSearch.clearFocus();
 
-        myDB = new MyDatabase(getActivity());
-        ArrayList<DictionaryEntitty> wordlist = myDB.getWords("amh");
+        ArrayList<DictionaryEntitty> wordlist = Splash.amharicwords;
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_amharic.setAdapter(adapter);
         lv_amharic.setTextFilterEnabled(true);
-
 
         inputSearch.addTextChangedListener(new TextWatcher() {
 
@@ -176,9 +173,8 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(),ViewMore.class);
+                    Intent intent = new Intent(getActivity(),ViewMoreAmharic.class);
                     Bundle b = new Bundle();
-                    b.putString("lang","amh");
                     b.putInt("id", id);
                     intent.putExtras(b);
                     startActivity(intent);

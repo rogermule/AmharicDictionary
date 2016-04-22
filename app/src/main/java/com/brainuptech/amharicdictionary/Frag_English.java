@@ -29,12 +29,9 @@ import java.util.Locale;
 public class Frag_English extends Fragment implements SearchView.OnQueryTextListener{
 
     private ListView lv_english;
-//    private SearchView mSearchView;
-
     public EditText inputeSearch;
     MyReportListAdapter adapter;
 
-    MyDatabase myDB;
     public Frag_English() {
         // Required empty public constructor
     }
@@ -56,8 +53,7 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
         lv_english.setTextFilterEnabled(true);
 
 
-        myDB = new MyDatabase(getActivity());
-        ArrayList<DictionaryEntitty> wordlist = myDB.getWords("eng");
+        ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_english.setAdapter(adapter);
         lv_english.setTextFilterEnabled(true);
@@ -125,7 +121,6 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             this.wordlist = wordlist;
             tts = new TextToSpeech(context,this);
             text_tts = "";
-
         }
 
         @Override
@@ -174,9 +169,8 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(),ViewMore.class);
+                    Intent intent = new Intent(getActivity(),ViewMoreEnglish.class);
                     Bundle b = new Bundle();
-                    b.putString("lang","eng");
                     b.putInt("id",id);
                     intent.putExtras(b);
                     startActivity(intent);
@@ -241,7 +235,6 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
         }
 
     }
-
 
 
     }

@@ -41,7 +41,7 @@ public class About extends Activity {
         FaceBook_Link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/brainuptech"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/Brain-Up-Software-Technologies-110275605972090/"));
                 startActivity(browserIntent);
             }
         });

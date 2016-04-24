@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
@@ -26,7 +24,7 @@ import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextListener{
+public class Frag_Amharic extends Fragment {
 
     private ListView lv_amharic;
 
@@ -93,20 +91,6 @@ public class Frag_Amharic extends Fragment implements SearchView.OnQueryTextList
     }
 
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        if (TextUtils.isEmpty(newText)) {
-            lv_amharic.clearTextFilter();
-        } else {
-            lv_amharic.setFilterText(newText);
-        }
-        return true;
-    }
 
 
     public class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener

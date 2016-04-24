@@ -34,8 +34,8 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    amharicwords = Dictionary.myDB.getWordsAmh();
-                    englishwords  = Dictionary.myDB.getWordsEng();
+                    amharicwords = Dictionary.myDB.getWordsAmhWithoutEnc();
+                    englishwords  = Dictionary.myDB.getWordsEngWithoutEnc();
                     //sleep(2000);
                 } catch(Exception e){
                 } finally {

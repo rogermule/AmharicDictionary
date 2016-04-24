@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
@@ -26,7 +25,7 @@ import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Frag_English extends Fragment implements SearchView.OnQueryTextListener{
+public class Frag_English extends Fragment{
 
     private ListView lv_english;
     public EditText inputeSearch;
@@ -62,8 +61,8 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                Frag_English.this.adapter.getFilter().filter(cs);
+                 // When user changed the Text
+                 Frag_English.this.adapter.getFilter().filter(cs);
             }
 
             @Override
@@ -88,20 +87,6 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
         super.onDestroy();
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        if (TextUtils.isEmpty(newText)) {
-            lv_english.clearTextFilter();
-        } else {
-            lv_english.setFilterText(newText);
-        }
-        return true;
-    }
 
 
     public class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
@@ -135,6 +120,7 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             return wordlist.get(arg0);
         }
 
+
         @Override
         public long getItemId(int position) {
             return 0;
@@ -150,33 +136,47 @@ public class Frag_English extends Fragment implements SearchView.OnQueryTextList
             TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
             btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
 
+            byte[] byte_word1,byte_word2;
+            final String decrypted_word1,decrypted_word2;
 
             final String title = wordlist.get(position).getWord1();
             final String definition = wordlist.get(position).getDefinition();
             final int id = wordlist.get(position).getId();
-            currentNum = position;
-            tv_title.setText(title);
-            tv_definition.setText(definition);
 
-            btn_tts.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    text_tts = title;
-                    speakOut();
+                try {
+                    byte_word1 = Enc.decodeFile(MyDatabase.keycode, Base64.decode(title, 0));
+                    byte_word2 = Enc.decodeFile(MyDatabase.keycode, Base64.decode(definition, 0));
+
+                    if (byte_word1 != null | byte_word2 != null) {
+                        decrypted_word1 = new String(byte_word1);
+                        decrypted_word2 = new String(byte_word2, "UTF-16BE");
+
+                        currentNum = position;
+                        tv_title.setText(decrypted_word1);
+                        tv_definition.setText(decrypted_word2);
+
+                        btn_tts.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                text_tts = decrypted_word1;
+                                speakOut();
+                            }
+                        });
+
+                        convertView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getActivity(), ViewMoreEnglish.class);
+                                Bundle b = new Bundle();
+                                b.putInt("id", id);
+                                intent.putExtras(b);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                } catch (Exception e){
+
                 }
-            });
-
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(),ViewMoreEnglish.class);
-                    Bundle b = new Bundle();
-                    b.putInt("id",id);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            });
-
             return convertView;
         }
 

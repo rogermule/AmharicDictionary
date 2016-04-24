@@ -22,7 +22,7 @@ public class MyDatabase extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "english.sqlite";
     private static final int DATABASE_VERSION = 1;
     public static final String[] column = {"_id "," word1 ", " word2"};
-    public byte[] keycode  = Enc.generateKey("roger");
+    public static byte[] keycode  = Enc.generateKey("roger");
 
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,11 +73,9 @@ public class MyDatabase extends SQLiteAssetHelper {
                     byte_word2 = Enc.decodeFile(keycode, Base64.decode(word2, 0));
 
                     if(byte_word1!=null | byte_word2!=null) {
-                        //Log.i("Test", "Byte arrray " + byte_word1);
                         decrypted_word1 = new String(byte_word1,"UTF-8");
                         decrypted_word2 = new String(byte_word2);
 
-                        //dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
                         dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
                         dis.setWord1(decrypted_word1);
                         dis.setDefinition(decrypted_word2);
@@ -133,7 +131,8 @@ public class MyDatabase extends SQLiteAssetHelper {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 } catch (Exception e){
-                    e.printStackTrace();                }
+                    e.printStackTrace();
+                }
             }
         }
         db.close();
@@ -188,7 +187,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         DictionaryEntitty dict = new DictionaryEntitty();
 
-        Cursor cur = db.rawQuery("select * from " + db_table + " where "+column[0]+ "='" + id+"'", null);
+        Cursor cur = db.rawQuery("select * from " + db_table + " where " + column[0] + "='" + id + "'", null);
         byte[] byte_word1,byte_word2;
         String word1,word2;
         String decrypted_word1,decrypted_word2;
@@ -221,5 +220,96 @@ public class MyDatabase extends SQLiteAssetHelper {
         db.close();
         return null;
     }
+
+
+
+
+
+
+
+
+
+    public ArrayList<DictionaryEntitty> getWordsAmhWithoutEnc(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String DB_Table = "AmharicDB";
+
+        String[] column2 = {"*"};
+
+        ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
+        Cursor c = db.query(DB_Table, column2, null, null, null, null, null);
+/*
+        byte[] byte_word1,byte_word2;
+        String word1,word2;
+        String decrypted_word1,decrypted_word2;*/
+        if(c.getCount()>0){
+            c.moveToFirst();
+            for(int i=0;i<c.getCount();i++){
+                c.moveToPosition(i);
+
+                DictionaryEntitty dis = new DictionaryEntitty();
+   /*             word1 = c.getString(c.getColumnIndex(c.getColumnName(1)));
+                word2 = c.getString(c.getColumnIndex(c.getColumnName(2)));
+
+                try {
+                    byte_word1 = Enc.decodeFile(keycode, Base64.decode(word1, 0));
+                    byte_word2 = Enc.decodeFile(keycode, Base64.decode(word2, 0));
+
+                    if(byte_word1!=null | byte_word2!=null) {
+                        decrypted_word1 = new String(byte_word1,"UTF-8");
+                        decrypted_word2 = new String(byte_word2);
+*/
+                        dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                        dis.setWord1(c.getString(c.getColumnIndex(c.getColumnName(1))));
+                        dis.setDefinition(c.getString(c.getColumnIndex(c.getColumnName(2))));
+                        found.add(dis);
+                    }
+
+        }
+        db.close();
+        return found;
+    }
+
+    public ArrayList<DictionaryEntitty> getWordsEngWithoutEnc(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String DB_Table = "EnglishDB";
+
+        String[] column2 = {"*"};
+
+        ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
+        Cursor c = db.query(DB_Table, column2, null, null, null, null, null);
+        Log.i("Test", "row count: "+ c.getCount() + " \n Column count: "+c.getColumnCount());
+
+/*        byte[] byte_word1,byte_word2;
+        String word1,word2;
+        String decrypted_word1,decrypted_word2;*/
+        if(c.getCount()>0){
+            c.moveToFirst();
+            for(int i=0;i<c.getCount();i++){
+                c.moveToPosition(i);
+
+                DictionaryEntitty dis = new DictionaryEntitty();
+/*                word1 = c.getString(c.getColumnIndex(c.getColumnName(1)));
+                word2 = c.getString(c.getColumnIndex(c.getColumnName(2)));
+
+                try {
+                    byte_word1 = Enc.decodeFile(keycode, Base64.decode(word1, 0));
+                    byte_word2 = Enc.decodeFile(keycode, Base64.decode(word2, 0));
+
+                    if(byte_word1!=null | byte_word2!=null) {
+                        decrypted_word1 = new String(byte_word1);
+                        decrypted_word2 = new String(byte_word2,"UTF-16BE");*/
+
+                        dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                        dis.setWord1(c.getString(c.getColumnIndex(c.getColumnName(1))));
+                        dis.setDefinition(c.getString(c.getColumnIndex(c.getColumnName(2))));
+                        found.add(dis);
+            }
+        }
+        db.close();
+        return found;
+    }
+
 
 }

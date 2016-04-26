@@ -7,7 +7,6 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +50,6 @@ public class Frag_English extends Fragment{
         lv_english = (ListView) view.findViewById(R.id.lv_english);
         lv_english.setTextFilterEnabled(true);
 
-
         ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_english.setAdapter(adapter);
@@ -69,7 +67,6 @@ public class Frag_English extends Fragment{
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
@@ -136,47 +133,32 @@ public class Frag_English extends Fragment{
             TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
             btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
 
-            byte[] byte_word1,byte_word2;
-            final String decrypted_word1,decrypted_word2;
-
             final String title = wordlist.get(position).getWord1();
             final String definition = wordlist.get(position).getDefinition();
             final int id = wordlist.get(position).getId();
+            currentNum = position;
+            tv_title.setText(title);
+            tv_definition.setText(definition);
 
-                try {
-                    byte_word1 = Enc.decodeFile(MyDatabase.keycode, Base64.decode(title, 0));
-                    byte_word2 = Enc.decodeFile(MyDatabase.keycode, Base64.decode(definition, 0));
-
-                    if (byte_word1 != null | byte_word2 != null) {
-                        decrypted_word1 = new String(byte_word1);
-                        decrypted_word2 = new String(byte_word2, "UTF-16BE");
-
-                        currentNum = position;
-                        tv_title.setText(decrypted_word1);
-                        tv_definition.setText(decrypted_word2);
-
-                        btn_tts.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                text_tts = decrypted_word1;
-                                speakOut();
-                            }
-                        });
-
-                        convertView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getActivity(), ViewMoreEnglish.class);
-                                Bundle b = new Bundle();
-                                b.putInt("id", id);
-                                intent.putExtras(b);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                } catch (Exception e){
-
+            btn_tts.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    text_tts = title;
+                    speakOut();
                 }
+            });
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ViewMoreEnglish.class);
+                    Bundle b = new Bundle();
+                    b.putInt("id", id);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            });
+
             return convertView;
         }
 
@@ -212,11 +194,9 @@ public class Frag_English extends Fragment{
             };
         }
 
-
         @Override
         public void onInit(int status) {
             if (status == TextToSpeech.SUCCESS) {
-
                 int result = tts.setLanguage(Locale.US);
                 if (result == TextToSpeech.LANG_MISSING_DATA
                         || result == TextToSpeech.LANG_NOT_SUPPORTED) {

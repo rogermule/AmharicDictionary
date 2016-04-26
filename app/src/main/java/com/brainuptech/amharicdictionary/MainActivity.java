@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
 
-        else if(Frag_Amharic.mCustomKeyboard != null) {
+        else if(Frag_Amharic.mCustomKeyboard != null && Frag_Amharic.mCustomKeyboard.isCustomKeyboardVisible()) {
             if (Frag_Amharic.mCustomKeyboard.isCustomKeyboardVisible())
                 Frag_Amharic.mCustomKeyboard.hideCustomKeyboard();
         }

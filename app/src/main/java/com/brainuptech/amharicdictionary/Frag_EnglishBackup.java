@@ -264,7 +264,6 @@ public class Frag_EnglishBackup extends Fragment{
 
 
 
-
 /*
     // In the Activity that will launch the native ad,
 // implement the AdListener interface and add the following:

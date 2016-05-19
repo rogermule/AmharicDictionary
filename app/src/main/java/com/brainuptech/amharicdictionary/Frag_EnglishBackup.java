@@ -26,7 +26,7 @@ import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Frag_EnglishBackup extends Fragment{
+public class Frag_EnglishBackup extends Fragment {
 
     private ListView lv_english;
     public EditText inputeSearch;

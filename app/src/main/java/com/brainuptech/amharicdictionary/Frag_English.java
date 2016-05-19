@@ -3,6 +3,7 @@ package com.brainuptech.amharicdictionary;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -24,11 +26,29 @@ import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Frag_English extends Fragment{
+public class Frag_English extends Fragment {
 
     private ListView lv_english;
     public EditText inputeSearch;
     MyReportListAdapter adapter;
+
+
+
+    private final int AUTOLOAD_THRESHOLD = 10;
+    private final int MAXIMUM_ITEMS = 33787;
+    private Handler mHandler;
+    private boolean mIsLoading = false;
+    private boolean mMoreDataAvailable = true;
+    private boolean mWasLoading = false;
+
+    boolean isSearching = false;
+    private Runnable mAddItemsRunnable = new Runnable() {
+        @Override
+        public void run() {
+            adapter.addMoreItems(100);
+            mIsLoading = false;
+        }
+    };
 
     public Frag_English() {
         // Required empty public constructor
@@ -37,30 +57,171 @@ public class Frag_English extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_english_list, container, false);
+        final ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
+
+        adapter = new MyReportListAdapter(getContext(), wordlist);
+        mHandler = new Handler();
 
         inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
         lv_english.setTextFilterEnabled(true);
 
-        ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
-        adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_english.setAdapter(adapter);
+
         lv_english.setTextFilterEnabled(true);
+        lv_english.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(!isSearching) {
+                    if (!mIsLoading && mMoreDataAvailable) {
+                        if (totalItemCount >= MAXIMUM_ITEMS) {
+                            mMoreDataAvailable = false;
+                        } else if (totalItemCount - AUTOLOAD_THRESHOLD <= firstVisibleItem + visibleItemCount) {
+                            mIsLoading = true;
+                            mHandler.postDelayed(mAddItemsRunnable, 10);
+                        }
+                    }
+                }
+            }
+        });
 
         inputeSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                  // When user changed the Text
-                 Frag_English.this.adapter.getFilter().filter(cs);
+                if(cs.length()<1){
+                    isSearching=false;
+                    adapter.wordlist = Splash.englishwords;
+                    adapter.notifyDataSetChanged();
+                }
+                else if(cs.length()==1) {
+                    isSearching = true;
+                    if (cs.toString().startsWith("a") | cs.toString().startsWith("A")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 0, 3243);
+                    } else if (cs.toString().startsWith("b") | cs.toString().startsWith("B")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 3244, 6337);
+
+                    } else if (cs.toString().startsWith("c") | cs.toString().startsWith("C")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 6338, 11368);
+
+                    } else if (cs.toString().startsWith("d") | cs.toString().startsWith("D")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 11369, 14380);
+
+                    } else if (cs.toString().startsWith("e") | cs.toString().startsWith("E")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 14381, 15764);
+
+                    } else if (cs.toString().startsWith("f") | cs.toString().startsWith("F")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 15765, 17170);
+
+                    } else if (cs.toString().startsWith("g") | cs.toString().startsWith("G")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 17171, 18123);
+
+                    } else if (cs.toString().startsWith("h") | cs.toString().startsWith("H")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 18124, 19195);
+
+                    } else if (cs.toString().startsWith("i") | cs.toString().startsWith("I")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 19196, 20290);
+
+                    } else if (cs.toString().startsWith("j") | cs.toString().startsWith("J")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 20291, 20596);
+
+                    } else if (cs.toString().startsWith("k") | cs.toString().startsWith("K")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 20597, 20928);
+
+                    } else if (cs.toString().startsWith("l") | cs.toString().startsWith("L")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 20929, 21886);
+
+                    } else if (cs.toString().startsWith("m") | cs.toString().startsWith("M")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 21887, 23335);
+
+                    } else if (cs.toString().startsWith("n") | cs.toString().startsWith("N")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 23336, 24156);
+
+                    } else if (cs.toString().startsWith("o") | cs.toString().startsWith("O")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 24157, 25011);
+
+                    } else if (cs.toString().startsWith("p") | cs.toString().startsWith("P")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),25012 ,27036);
+
+                    } else if (cs.toString().startsWith("q") | cs.toString().startsWith("Q")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 27037,27303 );
+
+                    } else if (cs.toString().startsWith("r") | cs.toString().startsWith("R")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),27304 ,28431);
+
+                    } else if (cs.toString().startsWith("s") | cs.toString().startsWith("S")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),28432, 30982);
+
+                    } else if (cs.toString().startsWith("t") | cs.toString().startsWith("T")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),30983 ,32169 );
+
+                    } else if (cs.toString().startsWith("u") | cs.toString().startsWith("U")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),32170 , 32501);
+
+                    } else if (cs.toString().startsWith("V") | cs.toString().startsWith("V")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),32502 ,32931 );
+
+                    } else if (cs.toString().startsWith("w") | cs.toString().startsWith("W")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 32932, 33552);
+
+                    } else if (cs.toString().startsWith("x") | cs.toString().startsWith("X")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(), 33553,33584);
+
+                    } else if (cs.toString().startsWith("y") | cs.toString().startsWith("Y")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),33585 ,33709 );
+
+                    } else if (cs.toString().startsWith("z") | cs.toString().startsWith("Z")) {
+                        adapter.orig = null;
+                        adapter.search(cs.toString(),33710 , 33784);
+                    }
+
+                }
+                else{
+                    isSearching = true;
+                    adapter.mCount = adapter.wordlist.size();
+                    adapter.getFilter().filter(cs);
+                }
+
             }
 
             @Override
@@ -86,29 +247,59 @@ public class Frag_English extends Fragment{
 
 
 
-    public class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
+    public static class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
     {
-        ArrayList<DictionaryEntitty> wordlist;
+        public static ArrayList<DictionaryEntitty> wordlist;
         public int currentNum = 0;
-
         public Context context;
         public ArrayList<DictionaryEntitty> orig;
         private TextToSpeech tts;
         private ImageButton btn_tts;
-
         String text_tts;
+
+//        private int mCount = 10;
+        private int mCount = 1;
+
         public MyReportListAdapter(Context context,ArrayList<DictionaryEntitty> wordlist)
         {
             this.context = context;
             this.wordlist = wordlist;
             tts = new TextToSpeech(context,this);
+            mCount = wordlist.size();
             text_tts = "";
+        }
+
+        public void addMoreItems(int count) {
+            ArrayList<DictionaryEntitty> entitties = Dictionary.myDB.getWordsEng(mCount);
+            for(DictionaryEntitty entiry: entitties){
+                wordlist.add(entiry);
+            }
+            mCount += count-1;
+            notifyDataSetChanged();
+        }
+        public void addMoreItemsSearch(int count) {
+            ArrayList<DictionaryEntitty> entitties = Dictionary.myDB.getWordsEng(mCount);
+            for(DictionaryEntitty entiry: entitties){
+                wordlist.add(entiry);
+            }
+            mCount += count-1;
+            notifyDataSetChanged();
+        }
+
+        public void search(String value,int range1,int range2){
+            wordlist = new ArrayList<DictionaryEntitty>();
+            notifyDataSetChanged();
+            ArrayList<DictionaryEntitty> results = Dictionary.myDB.searchEng(value,0,range1,range2);
+            wordlist = results;
+            mCount = results.size();
+            notifyDataSetChanged();
         }
 
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return wordlist.size();
+//            return wordlist.size();
+            return mCount;
         }
 
         @Override
@@ -125,40 +316,40 @@ public class Frag_English extends Fragment{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflate.inflate(R.layout.single_layout_word, null);
 
-            LayoutInflater inflate = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflate.inflate(R.layout.single_layout_word,null);
+            if(position<=mCount) {
+                TextView tv_title = (TextView) convertView.findViewById(R.id.word_title);
+                TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
+                btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
 
-            TextView tv_title = (TextView) convertView.findViewById(R.id.word_title);
-            TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
-            btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
+                final String title = wordlist.get(position).getWord1();
+                final String definition = wordlist.get(position).getDefinition();
+                final int id = wordlist.get(position).getId();
+                currentNum = position;
+                tv_title.setText(title);
+                tv_definition.setText(definition);
 
-            final String title = wordlist.get(position).getWord1();
-            final String definition = wordlist.get(position).getDefinition();
-            final int id = wordlist.get(position).getId();
-            currentNum = position;
-            tv_title.setText(title);
-            tv_definition.setText(definition);
+                btn_tts.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        text_tts = title;
+                        speakOut();
+                    }
+                });
 
-            btn_tts.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    text_tts = title;
-                    speakOut();
-                }
-            });
-
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), ViewMoreEnglish.class);
-                    Bundle b = new Bundle();
-                    b.putInt("id", id);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            });
-
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context.getApplicationContext(), ViewMoreEnglish.class);
+                        Bundle b = new Bundle();
+                        b.putInt("id", id);
+                        intent.putExtras(b);
+                        context.startActivity(intent);
+                    }
+                });
+            }
             return convertView;
         }
 
@@ -189,6 +380,7 @@ public class Frag_English extends Fragment{
                 protected void publishResults(CharSequence constraint,
                                               FilterResults results) {
                     wordlist = (ArrayList<DictionaryEntitty>) results.values;
+                    mCount=wordlist.size();
                     notifyDataSetChanged();
                 }
             };
@@ -202,7 +394,7 @@ public class Frag_English extends Fragment{
                         || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                     Log.e("TTS", "This Language is not supported");
                 } else {
-                    btn_tts.setEnabled(true);
+                    //btn_tts.setEnabled(true);
                     speakOut();
                 }
             } else {
@@ -217,4 +409,21 @@ public class Frag_English extends Fragment{
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+/*        if (mWasLoading) {
+            mWasLoading = false;
+            mIsLoading = true;
+            mHandler.postDelayed(mAddItemsRunnable, 1000);
+        }*/
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mHandler.removeCallbacks(mAddItemsRunnable);
+        mWasLoading = mIsLoading;
+        mIsLoading = false;
+    }
+}

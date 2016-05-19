@@ -19,7 +19,7 @@ public class Splash extends AppCompatActivity {
 
 
     public static ArrayList<DictionaryEntitty> amharicwords;
-    public static ArrayList<DictionaryEntitty> englishwords;
+    //public static ArrayList<DictionaryEntitty> englishwords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +37,17 @@ public class Splash extends AppCompatActivity {
         myDialog.setMessage("Loading 60,000 words.... \nPlease wait");
         myDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         myDialog.setMax(60000);
-        myDialog.show();
+
+        amharicwords  = Dictionary.myDB.getWordsAmh();
+        //englishwords  = Dictionary.myDB.getWordsEng(0);
+
+        getNextActivity();
+  /*      myDialog.show();
 
         Thread splash = new Thread(){
             @Override
             public void run() {
                 try {
-
-
                     amharicwords  = Dictionary.myDB.getWordsAmh(0);
                     myDialog.setProgress(23000);
                     englishwords  = Dictionary.myDB.getWordsEng(0);
@@ -60,12 +63,13 @@ public class Splash extends AppCompatActivity {
             }
         };
 
-        splash.start();
+        splash.start();*/
     }
 
     private void getNextActivity() {
         Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);
+        finish();
     }
 
     @Override

@@ -66,7 +66,7 @@ public class Frag_English extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_english_list, container, false);
-        final ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
+        final ArrayList<DictionaryEntitty> wordlist = Dictionary.myDB.getWordsEng(0);
 
         adapter = new MyReportListAdapter(getContext(), wordlist);
         mHandler = new Handler();
@@ -100,13 +100,12 @@ public class Frag_English extends Fragment {
         });
 
         inputeSearch.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                  // When user changed the Text
                 if(cs.length()<1){
                     isSearching=false;
-                    adapter.wordlist = Splash.englishwords;
+                    adapter.wordlist = wordlist;
                     adapter.currentWord= "";
                     adapter.mCount = adapter.wordlist.size();
                     adapter.notifyDataSetChanged();
@@ -438,14 +437,6 @@ public class Frag_English extends Fragment {
             mCount += count-1;
             notifyDataSetChanged();
         }
-        public void addMoreItemsSearch(int count) {
-            ArrayList<DictionaryEntitty> entitties = Dictionary.myDB.getWordsEng(mCount);
-            for(DictionaryEntitty entiry: entitties){
-                wordlist.add(entiry);
-            }
-            mCount += count-1;
-            notifyDataSetChanged();
-        }
 
         public void search(String value,int range1,int range2){
             wordlist = new ArrayList<DictionaryEntitty>();
@@ -583,8 +574,8 @@ public class Frag_English extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        mHandler.removeCallbacks(mAddItemsRunnable);
-        mWasLoading = mIsLoading;
-        mIsLoading = false;
+//        mHandler.removeCallbacks(mAddItemsRunnable);
+//        mWasLoading = mIsLoading;
+//        mIsLoading = false;
     }
 }

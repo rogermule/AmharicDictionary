@@ -53,7 +53,7 @@ public class Frag_EnglishBackup extends Fragment {
         lv_english.setTextFilterEnabled(true);
 
 
-        ArrayList<DictionaryEntitty> wordlist = Splash.englishwords;
+        ArrayList<DictionaryEntitty> wordlist = null;
         adapter = new MyReportListAdapter(getContext(), (ArrayList<DictionaryEntitty>) wordlist);
         lv_english.setAdapter(adapter);
         lv_english.setTextFilterEnabled(true);

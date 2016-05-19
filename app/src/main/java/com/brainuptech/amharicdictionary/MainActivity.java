@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Frag_Amharic.inputSearch.setText("");
-                Frag_Amharic.inputSearch.clearFocus();
+                Frag_Amharic.inputeSearch.setText("");
+                Frag_Amharic.inputeSearch.clearFocus();
+
             }
 
             @Override

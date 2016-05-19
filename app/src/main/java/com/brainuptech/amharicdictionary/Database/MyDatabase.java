@@ -103,7 +103,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         String[] column2 = {"*"};
 
         ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
-        Cursor c = db.query(DB_Table, column2, null, null, null, null, null,count+","+10);
+        Cursor c = db.query(DB_Table, column2, null, null, null, null, null,count+","+100);
 
         byte[] byte_word1,byte_word2;
         String word1,word2;
@@ -444,6 +444,69 @@ public class MyDatabase extends SQLiteAssetHelper {
                     if(byte_word1!=null | byte_word2!=null) {
                         decrypted_word1 = new String(byte_word1);
                         decrypted_word2 = new String(byte_word2,"UTF-16BE");
+/*
+                        Log.i("Test 1", "Value "+value+"\nWord1"+decrypted_word1.toLowerCase()+ "\n"+ decrypted_word1.toLowerCase().startsWith("a"));
+                        if(decrypted_word1.toLowerCase().startsWith(value)) {
+                            dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                            dis.setWord1(decrypted_word1);
+                            dis.setDefinition(decrypted_word2);
+                            found.add(dis);
+                            Log.i("Found","Found " + dis.getId());
+                        }*/
+                        dis.setId(Integer.parseInt(c.getString(c.getColumnIndex(c.getColumnName(0)))));
+                        dis.setWord1(decrypted_word1);
+                        dis.setDefinition(decrypted_word2);
+                        found.add(dis);
+                        Log.i("Found","Found " + dis.getId());
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        db.close();
+        return found;
+    }
+
+    public ArrayList<DictionaryEntitty> searchAmh(String value, int count, int range1, int range2){
+        SQLiteDatabase db = getReadableDatabase();
+        String DB_Table = "AmharicDB";
+        String[] column2 = {"*"};
+
+        ArrayList<DictionaryEntitty> found = new ArrayList<DictionaryEntitty>();
+/*        Cursor c = db.rawQuery("select * from " + DB_Table + " where " + column[1] + " like '" + value + "%' " +
+                "LIMIT "+count+", 20",  null);*/
+
+        Cursor c = db.rawQuery("SELECT * FROM " + DB_Table + " WHERE " + column[0] + " BETWEEN "+ range1 +" AND "+range2,  null);
+
+        Log.i("Test", "row count: "+ c.getCount() + " \n Column count: "+c.getColumnCount());
+        c.moveToFirst();
+        for(int i=0;i<c.getCount();i++){
+            Log.i("Test",c.getString(0));
+            c.moveToPosition(i);
+        }
+
+        byte[] byte_word1,byte_word2;
+        String word1,word2;
+        String decrypted_word1,decrypted_word2;
+        if(c.getCount()>0){
+            c.moveToFirst();
+            for(int i=0;i<c.getCount();i++){
+                c.moveToPosition(i);
+
+                DictionaryEntitty dis = new DictionaryEntitty();
+                word1 = c.getString(c.getColumnIndex(c.getColumnName(1)));
+                word2 = c.getString(c.getColumnIndex(c.getColumnName(2)));
+
+                try {
+                    byte_word1 = Enc.decodeFile(keycode, Base64.decode(word1, 0));
+                    byte_word2 = Enc.decodeFile(keycode, Base64.decode(word2, 0));
+
+                    if(byte_word1!=null | byte_word2!=null) {
+                        decrypted_word1 = new String(byte_word1,"UTF-8");
+                        decrypted_word2 = new String(byte_word2);
 /*
                         Log.i("Test 1", "Value "+value+"\nWord1"+decrypted_word1.toLowerCase()+ "\n"+ decrypted_word1.toLowerCase().startsWith("a"));
                         if(decrypted_word1.toLowerCase().startsWith(value)) {

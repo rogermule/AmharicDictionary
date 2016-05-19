@@ -107,114 +107,274 @@ public class Frag_English extends Fragment {
                 if(cs.length()<1){
                     isSearching=false;
                     adapter.wordlist = Splash.englishwords;
+                    adapter.currentWord= "";
+                    adapter.mCount = adapter.wordlist.size();
                     adapter.notifyDataSetChanged();
                 }
                 else if(cs.length()==1) {
                     isSearching = true;
                     if (cs.toString().startsWith("a") | cs.toString().startsWith("A")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 0, 3243);
+                        if(adapter.currentWord.equals("a")){
+                            adapter.getFilter().filter(cs);
+
+                        }
+                        else {
+                            adapter.currentWord = "a";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 0, 3243);
+                        }
                     } else if (cs.toString().startsWith("b") | cs.toString().startsWith("B")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 3244, 6337);
+                        if(adapter.currentWord.equals("b")){
+                            adapter.getFilter().filter(cs);
+
+                        }
+                        else {
+                            adapter.currentWord = "b";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 3244, 6337);
+                        }
 
                     } else if (cs.toString().startsWith("c") | cs.toString().startsWith("C")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 6338, 11368);
+                        if(adapter.currentWord.equals("c")){
+                            adapter.getFilter().filter(cs);
+
+                        }
+                        else {
+                            adapter.currentWord = "c";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 6338, 11368);
+                        }
 
                     } else if (cs.toString().startsWith("d") | cs.toString().startsWith("D")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 11369, 14380);
+                        if(adapter.currentWord.equals("d")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "d";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 11369, 14380);
+                        }
 
                     } else if (cs.toString().startsWith("e") | cs.toString().startsWith("E")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 14381, 15764);
+                        if(adapter.currentWord.equals("e")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "e";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 14381, 15764);
+                        }
 
                     } else if (cs.toString().startsWith("f") | cs.toString().startsWith("F")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 15765, 17170);
+                        if(adapter.currentWord.equals("f")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "f";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 15765, 17170);
+                        }
 
                     } else if (cs.toString().startsWith("g") | cs.toString().startsWith("G")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 17171, 18123);
+                        if(adapter.currentWord.equals("g")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "g";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 17171, 18123);
+                        }
 
                     } else if (cs.toString().startsWith("h") | cs.toString().startsWith("H")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 18124, 19195);
+                        if(adapter.currentWord.equals("h")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "h";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 18124, 19195);
+                        }
 
                     } else if (cs.toString().startsWith("i") | cs.toString().startsWith("I")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 19196, 20290);
+                        if(adapter.currentWord.equals("i")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "i";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 19196, 20290);
+                        }
 
                     } else if (cs.toString().startsWith("j") | cs.toString().startsWith("J")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 20291, 20596);
+                        if(adapter.currentWord.equals("j")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "j";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 20291, 20596);
+                        }
 
                     } else if (cs.toString().startsWith("k") | cs.toString().startsWith("K")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 20597, 20928);
+                        if(adapter.currentWord.equals("k")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "k";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 20597, 20928);
+                        }
 
                     } else if (cs.toString().startsWith("l") | cs.toString().startsWith("L")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 20929, 21886);
+                        if(adapter.currentWord.equals("l")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "l";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 20929, 21886);
+                        }
 
                     } else if (cs.toString().startsWith("m") | cs.toString().startsWith("M")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 21887, 23335);
+                        if(adapter.currentWord.equals("m")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "m";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 21887, 23335);
+                        }
 
                     } else if (cs.toString().startsWith("n") | cs.toString().startsWith("N")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 23336, 24156);
+                        if(adapter.currentWord.equals("n")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "n";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 23336, 24156);
+                        }
 
                     } else if (cs.toString().startsWith("o") | cs.toString().startsWith("O")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 24157, 25011);
+                        if(adapter.currentWord.equals("o")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "o";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 24157, 25011);
+                        }
 
                     } else if (cs.toString().startsWith("p") | cs.toString().startsWith("P")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),25012 ,27036);
+                        if(adapter.currentWord.equals("p")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "p";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 25012, 27036);
+                        }
 
                     } else if (cs.toString().startsWith("q") | cs.toString().startsWith("Q")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 27037,27303 );
+                        if(adapter.currentWord.equals("q")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "q";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 27037, 27303);
+                        }
 
                     } else if (cs.toString().startsWith("r") | cs.toString().startsWith("R")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),27304 ,28431);
+                        if(adapter.currentWord.equals("r")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "r";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 27304, 28431);
+                        }
 
                     } else if (cs.toString().startsWith("s") | cs.toString().startsWith("S")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),28432, 30982);
+                        if(adapter.currentWord.equals("s")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "s";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 28432, 30982);
+                        }
 
                     } else if (cs.toString().startsWith("t") | cs.toString().startsWith("T")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),30983 ,32169 );
+                        if(adapter.currentWord.equals("t")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "t";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 30983, 32169);
+                        }
 
                     } else if (cs.toString().startsWith("u") | cs.toString().startsWith("U")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),32170 , 32501);
+                        if(adapter.currentWord.equals("u")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "u";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 32170, 32501);
+                        }
 
-                    } else if (cs.toString().startsWith("V") | cs.toString().startsWith("V")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),32502 ,32931 );
+                    } else if (cs.toString().startsWith("v") | cs.toString().startsWith("V")) {
+                        if(adapter.currentWord.equals("v")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "v";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 32502, 32931);
+                        }
 
                     } else if (cs.toString().startsWith("w") | cs.toString().startsWith("W")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 32932, 33552);
+                        if(adapter.currentWord.equals("w")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "w";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 32932, 33552);
+                        }
 
                     } else if (cs.toString().startsWith("x") | cs.toString().startsWith("X")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(), 33553,33584);
+                        if(adapter.currentWord.equals("x")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "x";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 33553, 33584);
+                        }
 
                     } else if (cs.toString().startsWith("y") | cs.toString().startsWith("Y")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),33585 ,33709 );
+                        if(adapter.currentWord.equals("y")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "y";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 33585, 33709);
+                        }
 
                     } else if (cs.toString().startsWith("z") | cs.toString().startsWith("Z")) {
-                        adapter.orig = null;
-                        adapter.search(cs.toString(),33710 , 33784);
+                        if(adapter.currentWord.equals("z")){
+                            adapter.getFilter().filter(cs);
+                        }
+                        else {
+                            adapter.currentWord = "z";
+                            adapter.orig = null;
+                            adapter.search(cs.toString(), 33710, 33784);
+                        }
                     }
-
                 }
                 else{
                     isSearching = true;
@@ -249,6 +409,7 @@ public class Frag_English extends Fragment {
 
     public static class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
     {
+        String currentWord = "";
         public static ArrayList<DictionaryEntitty> wordlist;
         public int currentNum = 0;
         public Context context;

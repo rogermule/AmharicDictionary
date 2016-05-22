@@ -319,7 +319,28 @@ public class MyDatabase extends SQLiteAssetHelper {
         return null;
     }
 
+    public DictionaryEntitty getDetailAmhWithoutEnc(int id){
+        String db_table = "AmharicDB";
 
+        SQLiteDatabase db = getReadableDatabase();
+        DictionaryEntitty dict = new DictionaryEntitty();
+
+        Cursor cur = db.rawQuery("select * from " + db_table + " where " + column[0] + "='" + id + "'", null);
+        String word1,word2;
+        if(cur.getCount()>0) {
+            cur.moveToFirst();
+
+            word1 = cur.getString(cur.getColumnIndex(cur.getColumnName(1)));
+            word2 = cur.getString(cur.getColumnIndex(cur.getColumnName(2)));
+            dict.setId(id);
+            dict.setWord1(word1);
+            dict.setDefinition(word2);
+            db.close();
+            return dict;
+        }
+        db.close();
+        return null;
+    }
 
     public ArrayList<DictionaryEntitty> getWordsAmhWithoutEnc(){
         SQLiteDatabase db = getReadableDatabase();

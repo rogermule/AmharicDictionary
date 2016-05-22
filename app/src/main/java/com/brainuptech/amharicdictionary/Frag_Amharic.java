@@ -41,13 +41,13 @@ public class Frag_Amharic extends Fragment {
     private boolean mWasLoading = false;
 
     boolean isSearching = false;
-    private Runnable mAddItemsRunnable2 = new Runnable() {
+/*    private Runnable mAddItemsRunnable2 = new Runnable() {
         @Override
         public void run() {
             adapter.addMoreItems(100);
             mIsLoading = false;
         }
-    };
+    };*/
 
 
     public Frag_Amharic() {
@@ -105,7 +105,7 @@ public class Frag_Amharic extends Fragment {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                if(cs.length()<1){
+/*                if(cs.length()<1){
                     isSearching=false;
                     adapter.wordlist = wordlist;
                     adapter.currentWord= "";
@@ -593,7 +593,9 @@ public class Frag_Amharic extends Fragment {
                     isSearching = true;
                     adapter.mCount = adapter.wordlist.size();
                     adapter.getFilter().filter(cs);
-                }
+                }*/
+
+                adapter.getFilter().filter(cs);
             }
 
             @Override

@@ -43,7 +43,7 @@ public class ViewMoreAmharic extends AppCompatActivity implements TextToSpeech.O
         btn_tts = (ImageButton) findViewById(R.id.viewmore_tts);
         btn_copy = (ImageButton) findViewById(R.id.ib_copy);
 
-        final DictionaryEntitty dict =  Dictionary.myDB.getDetailAmh(id);
+        final DictionaryEntitty dict =  Dictionary.myDB.getDetailAmhWithoutEnc(id);
         if(dict!=null) {
             tv_word1.setText(dict.getWord1());
             tv_word2.setText(dict.getDefinition());

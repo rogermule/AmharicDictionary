@@ -1,6 +1,11 @@
 package com.brainuptech.amharicdictionary;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,54 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        settings = getSharedPreferences(Splash.PREFS_NAME, 0);
+        if(!settings.getBoolean("hasRate",false)) {
+            int countVal = settings.getInt("count", 0);
+            if (countVal > 9) {
+                rateMyAppDialog();
+            }
+        }
+
+    }
+
+    private void rateMyAppDialog() {
+
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences.Editor editor = settings.edit();
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        rateMyApp();
+                        editor.putBoolean("hasRate",true);
+                        editor.commit();
+                        break;
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        //Neutral button clicked
+                        editor.putBoolean("hasRate",false);
+                        editor.putInt("count",1);
+                        editor.commit();
+                         break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        editor.putBoolean("hasRate",true);
+                        editor.commit();
+                        break;
+                }
+            }
+        };
+
+
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Amharic Dictionray:").setMessage("Do you like this app? Please Rate it")
+                .setPositiveButton("Yes, Rate it now", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+			   .setNeutralButton("Remind me later", dialogClickListener)
+                .show();
+
     }
 
 
@@ -124,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_amharic) {
             viewPager.setCurrentItem(1);
         }  else if (id == R.id.nav_share) {
-
+            shareApp();
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(this,About.class);
             startActivity(intent);
@@ -177,5 +231,27 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+    public void shareApp(){
+
+        String shareBody = "market://details?id=com.habeshagames.gursha";
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amharic dictionary");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.app_name)));
+    }
+
+    public void rateMyApp() {
+
+        Uri uri = Uri.parse("market://details?id=com.habeshagames.gursha");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.habeshagames.gursha")));
+        }
+
+    }
 
 }

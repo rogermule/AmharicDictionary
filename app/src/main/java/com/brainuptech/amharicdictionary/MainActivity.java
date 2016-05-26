@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Frag_Amharic.inputeSearch.setText("");
-                Frag_Amharic.inputeSearch.clearFocus();
                 Frag_English.inputeSearch.setText("");
-                Frag_English.inputeSearch.clearFocus();
+
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override

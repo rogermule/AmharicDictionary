@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,10 +31,15 @@ import java.util.Locale;
 public class Frag_English extends Fragment {
 
     private ListView lv_english;
-    public EditText inputeSearch;
+    public static EditText inputeSearch;
     MyReportListAdapter adapter;
 
+    public static ArrayList<View> adViews;
 
+    public static AdView mAdView,mAdView1,mAdView2,mAdView3;
+    public static AdRequest adRequest,adRequest1,adRequest2,adRequest3;
+
+    public static View mainAdView,mainAdView1,mainAdView2,mainAdView3;
 
     private final int AUTOLOAD_THRESHOLD = 10;
     private final int MAXIMUM_ITEMS = 33787;
@@ -46,7 +53,7 @@ public class Frag_English extends Fragment {
         @Override
         public void run() {
             adapter.addMoreItems(100);
-            mIsLoading = false;
+            adapter.notifyDataSetChanged();
         }
     };
 
@@ -57,7 +64,6 @@ public class Frag_English extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -70,6 +76,36 @@ public class Frag_English extends Fragment {
 
         adapter = new MyReportListAdapter(getContext(), wordlist);
         mHandler = new Handler();
+
+
+        adViews = new ArrayList<View>();
+
+        mainAdView = inflater.inflate(R.layout.adview,container,false);
+        mainAdView1 = inflater.inflate(R.layout.adview,container,false);
+        mainAdView2 = inflater.inflate(R.layout.adview,container,false);
+        mainAdView3 = inflater.inflate(R.layout.adview,container,false);
+
+        adRequest = new AdRequest.Builder().build();
+        mAdView = (AdView) mainAdView.findViewById(R.id.adView);
+        mAdView.loadAd(adRequest);
+
+        adRequest1 = new AdRequest.Builder().build();
+        mAdView1 = (AdView) mainAdView1.findViewById(R.id.adView);
+        mAdView1.loadAd(adRequest1);
+
+        adRequest2 = new AdRequest.Builder().build();
+        mAdView2 = (AdView) mainAdView2.findViewById(R.id.adView);
+        mAdView2.loadAd(adRequest2);
+
+        adRequest3 = new AdRequest.Builder().build();
+        mAdView3 = (AdView) mainAdView3.findViewById(R.id.adView);
+        mAdView3.loadAd(adRequest3);
+
+        adViews.add(mainAdView);
+        adViews.add(mainAdView1);
+        adViews.add(mainAdView2);
+        adViews.add(mainAdView3);
+
 
         inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
@@ -405,9 +441,32 @@ public class Frag_English extends Fragment {
     }
 
 
+    public static View getAds(Context context,int position){
+
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if(position/10==1){
+            return adViews.get(1);
+        }
+
+        else if(position/10==2){
+            return adViews.get(2);
+        }
+
+        else if(position/10==3){
+            return adViews.get(3);
+        }
+
+        else{
+            return adViews.get(0);
+        }
+
+    }
 
     public static class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
     {
+
+
         String currentWord = "";
         public static ArrayList<DictionaryEntitty> wordlist;
         public int currentNum = 0;
@@ -416,6 +475,7 @@ public class Frag_English extends Fragment {
         private TextToSpeech tts;
         private ImageButton btn_tts;
         String text_tts;
+
 
 //        private int mCount = 10;
         private int mCount = 1;
@@ -427,6 +487,7 @@ public class Frag_English extends Fragment {
             tts = new TextToSpeech(context,this);
             mCount = wordlist.size();
             text_tts = "";
+
         }
 
         public void addMoreItems(int count) {
@@ -457,6 +518,9 @@ public class Frag_English extends Fragment {
         @Override
         public Object getItem(int arg0) {
             // TODO Auto-generated method stub
+            if(arg0%10 ==0){
+                return arg0;
+            }
             return wordlist.get(arg0);
         }
 
@@ -469,40 +533,48 @@ public class Frag_English extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflate.inflate(R.layout.single_layout_word, null);
+            Log.i("Test","Current Position " + position);
 
-            if(position<=mCount) {
-                TextView tv_title = (TextView) convertView.findViewById(R.id.word_title);
-                TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
-                btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
-
-                final String title = wordlist.get(position).getWord1();
-                final String definition = wordlist.get(position).getDefinition();
-                final int id = wordlist.get(position).getId();
-                currentNum = position;
-                tv_title.setText(title);
-                tv_definition.setText(definition);
-
-                btn_tts.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        text_tts = title;
-                        speakOut();
-                    }
-                });
-
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context.getApplicationContext(), ViewMoreEnglish.class);
-                        Bundle b = new Bundle();
-                        b.putInt("id", id);
-                        intent.putExtras(b);
-                        context.startActivity(intent);
-                    }
-                });
+            if(position %10==0){
+               return getAds(context,position);
             }
-            return convertView;
+
+            else {
+                convertView = inflate.inflate(R.layout.single_layout_word, null);
+
+                if (position <= mCount) {
+                    TextView tv_title = (TextView) convertView.findViewById(R.id.word_title);
+                    TextView tv_definition = (TextView) convertView.findViewById(R.id.word_definition);
+                    btn_tts = (ImageButton) convertView.findViewById(R.id.main_tts);
+
+                    final String title = wordlist.get(position).getWord1();
+                    final String definition = wordlist.get(position).getDefinition();
+                    final int id = wordlist.get(position).getId();
+                    currentNum = position;
+                    tv_title.setText(title);
+                    tv_definition.setText(definition);
+
+                    btn_tts.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            text_tts = title;
+                            speakOut();
+                        }
+                    });
+
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context.getApplicationContext(), ViewMoreEnglish.class);
+                            Bundle b = new Bundle();
+                            b.putInt("id", id);
+                            intent.putExtras(b);
+                            context.startActivity(intent);
+                        }
+                    });
+                }
+                return convertView;
+            }
         }
 
         @Override

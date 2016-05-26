@@ -39,7 +39,7 @@ public class Splash extends AppCompatActivity {
         myDialog.setMessage("Loading.... \nPlease wait");
         myDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         myDialog.setMax(23000);
-        myDialog.show();
+        //myDialog.show();
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         if(!settings.getBoolean("hasRate",false)) {
@@ -62,7 +62,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 try {
                     amharicwords  = Dictionary.myDB.getWordsAmhWithoutEnc();
-                    myDialog.setProgress(23000);
+                    //myDialog.setProgress(23000);
 //                    englishwords  = Dictionary.myDB.getWordsEng(0);
 //                    myDialog.setProgress(60000);
 
@@ -70,7 +70,7 @@ public class Splash extends AppCompatActivity {
                 } catch(Exception e){
                 } finally {
                     getNextActivity();
-                    myDialog.cancel();
+                    //myDialog.cancel();
                     finish();
                 }
             }

@@ -377,7 +377,6 @@ public class MyDatabase extends SQLiteAssetHelper {
                         dis.setDefinition(c.getString(c.getColumnIndex(c.getColumnName(2))));
                         found.add(dis);
                     }
-
         }
         db.close();
         return found;

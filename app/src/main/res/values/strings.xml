@@ -8,5 +8,11 @@
     <string name="keycode">roger</string>
     <string name="action_about">About</string>
 
+   <!-- <string name="ad_unit_id"> ca-app-pub-6608952583904649/1426803618</string>-->
+    <string name="ad_unit_id"> ca-app-pub-3940256099942544/1072772517</string>
+
+    <!-- AdMob ad unit IDs -->
+    <string name="banner_home_footer">ca-app-pub-3120536913205473/5975042732</string>
+    <string name="interstitial_full_screen">ca-app-pub-3120536913205473/3021576335</string>
 
 </resources>

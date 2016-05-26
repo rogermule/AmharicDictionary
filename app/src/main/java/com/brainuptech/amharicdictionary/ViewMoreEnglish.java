@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Locale;
 
@@ -26,14 +28,24 @@ public class ViewMoreEnglish extends AppCompatActivity implements TextToSpeech.O
     ImageButton btn_tts, btn_copy;
 
     String text_tts;
+
+
+
+    private static final String ADMOB_AD_UNIT_ID = "ca-app-pub-6608952583904649/1426803618";
+    private static final String ADMOB_APP_ID = "ca-app-pub-6608952583904649~5637765614";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_more);
         setSupportActionBar((Toolbar) findViewById(R.id.detail_toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final int id = getIntent().getExtras().getInt("id");
 
+        NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adViewNative);
+        adView.loadAd(new AdRequest.Builder().build());
+
+
+        final int id = getIntent().getExtras().getInt("id");
         tv_word1 = (TextView) findViewById(R.id.detail_word1);
         tv_word2 = (TextView) findViewById(R.id.detail_word2);
 
@@ -70,6 +82,7 @@ public class ViewMoreEnglish extends AppCompatActivity implements TextToSpeech.O
                 Toast.makeText(getApplicationContext(),"Text copied to clipboard",Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private void speakOut() {
@@ -122,5 +135,7 @@ public class ViewMoreEnglish extends AppCompatActivity implements TextToSpeech.O
         tts.stop();
         finish();
     }
+
+
 }
 

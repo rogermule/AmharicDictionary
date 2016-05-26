@@ -19,7 +19,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -62,7 +61,8 @@ public class MainActivity extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 Frag_Amharic.inputeSearch.setText("");
                 Frag_Amharic.inputeSearch.clearFocus();
-
+                Frag_English.inputeSearch.setText("");
+                Frag_English.inputeSearch.clearFocus();
             }
 
             @Override
@@ -143,12 +143,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -166,6 +168,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -233,8 +236,7 @@ public class MainActivity extends AppCompatActivity
 
 
     public void shareApp(){
-
-        String shareBody = "market://details?id=com.habeshagames.gursha";
+        String shareBody = "Get Free amharic dictionary  market://details?id=com.brainuptech.amharicdictionary";
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amharic dictionary");
@@ -244,14 +246,13 @@ public class MainActivity extends AppCompatActivity
 
     public void rateMyApp() {
 
-        Uri uri = Uri.parse("market://details?id=com.habeshagames.gursha");
+        Uri uri = Uri.parse("market://details?id=com.brainuptech.amharicdictionary");
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         try {
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.habeshagames.gursha")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.brainuptech.amharicdictionary")));
         }
-
     }
 
 }

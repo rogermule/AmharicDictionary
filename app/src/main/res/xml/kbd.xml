@@ -59,11 +59,11 @@
     <Row>
         <Key android:codes="1330"    android:keyLabel="ፐ" android:keyEdgeFlags="left"/>
         <Key android:codes="1400"   android:keyLabel=":"  />
-        <Key android:codes="1"   android:keyIcon="@drawable/space_icon" android:keyWidth="30%p" />
-        <Key android:codes="-5"  android:keyWidth="10%p" android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true" android:horizontalGap="3.5%p" />
+        <Key android:codes="1"   android:keyIcon="@drawable/space_icon" android:keyWidth="30%p"  android:horizontalGap="2.5%p"  />
+        <Key android:codes="-5"  android:keyWidth="10%p" android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"  android:horizontalGap="1.5%p" />
         <Key android:codes="55002" android:keyIcon="@drawable/sym_keyboard_left" android:isRepeatable="true" />
-        <Key android:codes="55003" android:keyIcon="@drawable/sym_keyboard_right" android:isRepeatable="true" android:horizontalGap="2.0%p" />
-        <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyEdgeFlags="right" android:horizontalGap="2.0%p"/>
+        <Key android:codes="55003" android:keyIcon="@drawable/sym_keyboard_right" android:isRepeatable="true" android:horizontalGap="1.5%p" />
+        <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyEdgeFlags="right" android:horizontalGap="1.5%p"/>
     </Row>
 
 </Keyboard>

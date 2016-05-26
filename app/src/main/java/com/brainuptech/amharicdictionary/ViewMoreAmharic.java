@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Locale;
 
@@ -32,9 +34,12 @@ public class ViewMoreAmharic extends AppCompatActivity implements TextToSpeech.O
         setContentView(R.layout.view_more);
         setSupportActionBar((Toolbar) findViewById(R.id.detail_toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        final String keyWord = getIntent().getExtras().getString("word1");
-        final int id = getIntent().getExtras().getInt("id");
 
+
+        NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adViewNative);
+        adView.loadAd(new AdRequest.Builder().build());
+
+        final int id = getIntent().getExtras().getInt("id");
         tv_word1 = (TextView) findViewById(R.id.detail_word1);
         tv_word2 = (TextView) findViewById(R.id.detail_word2);
 

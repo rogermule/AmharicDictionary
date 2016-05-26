@@ -33,27 +33,30 @@ public class Frag_English extends Fragment {
     private ListView lv_english;
     public static EditText inputeSearch;
     MyReportListAdapter adapter;
+    ArrayList<DictionaryEntitty> wordlist;
 
-    public static ArrayList<View> adViews;
+    public static TextToSpeech tts;
 
-    public static AdView mAdView,mAdView1,mAdView2,mAdView3;
-    public static AdRequest adRequest,adRequest1,adRequest2,adRequest3;
 
-    public static View mainAdView,mainAdView1,mainAdView2,mainAdView3;
+    public static AdView mAdView;
+    public static AdRequest adRequest;
+    public static View mainAdView;
 
     private final int AUTOLOAD_THRESHOLD = 10;
-    private final int MAXIMUM_ITEMS = 33787;
+    private final int MAXIMUM_ITEMS = 33786;
     private Handler mHandler;
     private boolean mIsLoading = false;
     private boolean mMoreDataAvailable = true;
     private boolean mWasLoading = false;
-
     boolean isSearching = false;
+
     private Runnable mAddItemsRunnable = new Runnable() {
         @Override
         public void run() {
             adapter.addMoreItems(100);
-            adapter.notifyDataSetChanged();
+            mIsLoading = false;
+            Log.i("LoadTest","Adding more words");
+
         }
     };
 
@@ -72,40 +75,15 @@ public class Frag_English extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_english_list, container, false);
-        final ArrayList<DictionaryEntitty> wordlist = Dictionary.myDB.getWordsEng(0);
+        wordlist = Dictionary.myDB.getWordsEng(0);
 
         adapter = new MyReportListAdapter(getContext(), wordlist);
         mHandler = new Handler();
 
-
-        adViews = new ArrayList<View>();
-
         mainAdView = inflater.inflate(R.layout.adview,container,false);
-        mainAdView1 = inflater.inflate(R.layout.adview,container,false);
-        mainAdView2 = inflater.inflate(R.layout.adview,container,false);
-        mainAdView3 = inflater.inflate(R.layout.adview,container,false);
-
         adRequest = new AdRequest.Builder().build();
         mAdView = (AdView) mainAdView.findViewById(R.id.adView);
         mAdView.loadAd(adRequest);
-
-        adRequest1 = new AdRequest.Builder().build();
-        mAdView1 = (AdView) mainAdView1.findViewById(R.id.adView);
-        mAdView1.loadAd(adRequest1);
-
-        adRequest2 = new AdRequest.Builder().build();
-        mAdView2 = (AdView) mainAdView2.findViewById(R.id.adView);
-        mAdView2.loadAd(adRequest2);
-
-        adRequest3 = new AdRequest.Builder().build();
-        mAdView3 = (AdView) mainAdView3.findViewById(R.id.adView);
-        mAdView3.loadAd(adRequest3);
-
-        adViews.add(mainAdView);
-        adViews.add(mainAdView1);
-        adViews.add(mainAdView2);
-        adViews.add(mainAdView3);
-
 
         inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
@@ -128,7 +106,7 @@ public class Frag_English extends Fragment {
                             mMoreDataAvailable = false;
                         } else if (totalItemCount - AUTOLOAD_THRESHOLD <= firstVisibleItem + visibleItemCount) {
                             mIsLoading = true;
-                            mHandler.postDelayed(mAddItemsRunnable, 10);
+                            mHandler.postDelayed(mAddItemsRunnable, 50);
                         }
                     }
                 }
@@ -442,43 +420,20 @@ public class Frag_English extends Fragment {
 
 
     public static View getAds(Context context,int position){
-
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if(position/10==1){
-            return adViews.get(1);
-        }
-
-        else if(position/10==2){
-            return adViews.get(2);
-        }
-
-        else if(position/10==3){
-            return adViews.get(3);
-        }
-
-        else{
-            return adViews.get(0);
-        }
-
+        return mainAdView;
     }
 
     public static class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
     {
-
-
         String currentWord = "";
         public static ArrayList<DictionaryEntitty> wordlist;
         public int currentNum = 0;
         public Context context;
         public ArrayList<DictionaryEntitty> orig;
-        private TextToSpeech tts;
         private ImageButton btn_tts;
         String text_tts;
 
-
-//        private int mCount = 10;
-        private int mCount = 1;
+        private int mCount;
 
         public MyReportListAdapter(Context context,ArrayList<DictionaryEntitty> wordlist)
         {
@@ -487,7 +442,7 @@ public class Frag_English extends Fragment {
             tts = new TextToSpeech(context,this);
             mCount = wordlist.size();
             text_tts = "";
-
+            Log.i("LoadTest","Count Length at start "+mCount);
         }
 
         public void addMoreItems(int count) {
@@ -495,7 +450,8 @@ public class Frag_English extends Fragment {
             for(DictionaryEntitty entiry: entitties){
                 wordlist.add(entiry);
             }
-            mCount += count-1;
+            mCount +=count-1;
+            Log.i("LoadTest","Count: "+ mCount);
             notifyDataSetChanged();
         }
 
@@ -518,8 +474,8 @@ public class Frag_English extends Fragment {
         @Override
         public Object getItem(int arg0) {
             // TODO Auto-generated method stub
-            if(arg0%10 ==0){
-                return arg0;
+            if(arg0==2){
+                return null;
             }
             return wordlist.get(arg0);
         }
@@ -533,9 +489,9 @@ public class Frag_English extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            Log.i("Test","Current Position " + position);
+            Log.i("LoadTest","Current Position " + position);
 
-            if(position %10==0){
+            if(position==2){
                return getAds(context,position);
             }
 
@@ -636,18 +592,18 @@ public class Frag_English extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-/*        if (mWasLoading) {
+        if (mWasLoading) {
             mWasLoading = false;
             mIsLoading = true;
-            mHandler.postDelayed(mAddItemsRunnable, 1000);
-        }*/
+            mHandler.postDelayed(mAddItemsRunnable, 100);
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-//        mHandler.removeCallbacks(mAddItemsRunnable);
-//        mWasLoading = mIsLoading;
-//        mIsLoading = false;
+        mHandler.removeCallbacks(mAddItemsRunnable);
+        mWasLoading = mIsLoading;
+        mIsLoading = false;
     }
 }

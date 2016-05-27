@@ -3779,7 +3779,6 @@ class CustomKeyboard {
         mKeyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);
         // Hide the standard keyboard initially
         mHostActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         keys = mKeyboardView.getKeyboard().getKeys();
 
 

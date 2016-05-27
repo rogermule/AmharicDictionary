@@ -22,8 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -36,11 +36,14 @@ public class Frag_English extends Fragment {
     ArrayList<DictionaryEntitty> wordlist;
 
     public static TextToSpeech tts;
+    public boolean notLoaded = false;
 
-
-    public static AdView mAdView;
+/*    public static AdView mAdView;
     public static AdRequest adRequest;
+*/
+
     public static View mainAdView;
+    public static NativeExpressAdView adView;
 
     private final int AUTOLOAD_THRESHOLD = 10;
     private final int MAXIMUM_ITEMS = 33786;
@@ -79,11 +82,43 @@ public class Frag_English extends Fragment {
 
         adapter = new MyReportListAdapter(getContext(), wordlist);
         mHandler = new Handler();
-
+///*
+//        adRequest = new AdRequest.Builder().build();
+//        mAdView = (AdView) mainAdView.findViewById(R.id.adView);
+//        mAdView.loadAd(adRequest);*/
+//
         mainAdView = inflater.inflate(R.layout.adview,container,false);
-        adRequest = new AdRequest.Builder().build();
-        mAdView = (AdView) mainAdView.findViewById(R.id.adView);
-        mAdView.loadAd(adRequest);
+        adView = (NativeExpressAdView) mainAdView.findViewById(R.id.adViewNativeSmall);
+       // adView.loadAd(new AdRequest.Builder().build());
+        adView.loadAd(MainActivity.adRequest);
+
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                notLoaded = false;
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+        });
 
         inputeSearch = (EditText) view.findViewById(R.id.inputSearch_eng);
         lv_english = (ListView) view.findViewById(R.id.lv_english);
@@ -411,15 +446,24 @@ public class Frag_English extends Fragment {
         return view;
     }
 
+    
+    @Override
+    public void onResume() {
+        adView.resume();
+        super.onResume();
+    }
 
-
+    @Override
+    public void onPause() {
+        adView.pause();
+        super.onPause();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
-
-    public static View getAds(Context context,int position){
+    public static View getAds(){
         return mainAdView;
     }
 
@@ -474,10 +518,11 @@ public class Frag_English extends Fragment {
         @Override
         public Object getItem(int arg0) {
             // TODO Auto-generated method stub
-            if(arg0==2){
-                return null;
+            if(arg0%13==0){
+                return getAds();
             }
             return wordlist.get(arg0);
+//            return null;
         }
 
 
@@ -491,11 +536,11 @@ public class Frag_English extends Fragment {
             LayoutInflater inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             Log.i("LoadTest","Current Position " + position);
 
-            if(position==2){
-               return getAds(context,position);
-            }
+//            if(position%13==0 ){
+//                return getAds();
+//            }
 
-            else {
+//            else {
                 convertView = inflate.inflate(R.layout.single_layout_word, null);
 
                 if (position <= mCount) {
@@ -530,7 +575,7 @@ public class Frag_English extends Fragment {
                     });
                 }
                 return convertView;
-            }
+
         }
 
         @Override

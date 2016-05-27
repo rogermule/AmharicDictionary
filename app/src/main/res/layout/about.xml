@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="16dp"
-            android:text="Amharic Dictionary by BrainUp tech. \nThis is a cool amharic app.  "
+            android:text="@string/about_detail"
             android:background="#ffffff"
             android:padding="15dp"
             android:gravity="center_horizontal"/>
@@ -35,6 +35,16 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:text="www.brainuptech.com"
+                android:background="#ffffff"
+                android:padding="15dp"
+                android:gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/txt_facebook"

@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:gravity="center_vertical|center_horizontal"
+    <com.google.android.gms.ads.NativeExpressAdView
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:id="@+id/adViewNativeSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_home_footer">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/ad_unit_id_small"
+        ads:adSize="360x80">
+    </com.google.android.gms.ads.NativeExpressAdView>
 
 </LinearLayout>

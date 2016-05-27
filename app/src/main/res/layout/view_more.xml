@@ -123,12 +123,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 ads:adUnitId="@string/ad_unit_id"
-                ads:adSize="320x150">
+                ads:adSize="360x320">
             </com.google.android.gms.ads.NativeExpressAdView>
 
-
         </LinearLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

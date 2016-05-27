@@ -20,8 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.brainuptech.amharicdictionary.Entities.DictionaryEntitty;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -33,10 +32,8 @@ public class Frag_Amharic extends Fragment {
     MyReportListAdapter adapter;
     public static CustomKeyboard mCustomKeyboard;
 
-    public static AdView mAdView;
-    public static AdRequest adRequest;
     public static View mainAdView;
-
+    public static NativeExpressAdView adView;
     public Frag_Amharic() {
         // Required empty public constructor
     }
@@ -56,10 +53,14 @@ public class Frag_Amharic extends Fragment {
         lv_amharic = (ListView) view.findViewById(R.id.lv_amharic);
 
 
-        mainAdView = inflater.inflate(R.layout.adview,container,false);
-        adRequest = new AdRequest.Builder().build();
+/*        adRequest = new AdRequest.Builder().build();
         mAdView = (AdView) mainAdView.findViewById(R.id.adView);
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
+
+        mainAdView = inflater.inflate(R.layout.adview,container,false);
+        adView = (NativeExpressAdView) mainAdView.findViewById(R.id.adViewNativeSmall);
+//        adView.loadAd(new AdRequest.Builder().build());
+        adView.loadAd(MainActivity.adRequest);
 
         mCustomKeyboard= new CustomKeyboard(getActivity(),view, R.id.keyboardview, R.xml.kbd );
         mCustomKeyboard.registerEditText(inputeSearch);
@@ -98,12 +99,24 @@ public class Frag_Amharic extends Fragment {
 
     @Override
     public void onDestroy() {
+        adView.destroy();
         super.onDestroy();
     }
 
+    @Override
+    public void onPause() {
+        adView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        adView.resume();
+        super.onResume();
+    }
 
     public static View getAds(){
-        return mainAdView;
+        return adView;
     }
 
     public class MyReportListAdapter extends BaseAdapter implements Filterable, TextToSpeech.OnInitListener
@@ -136,7 +149,10 @@ public class Frag_Amharic extends Fragment {
         @Override
         public Object getItem(int arg0) {
             // TODO Auto-generated method stub
-            return null;
+            if(arg0%13==0 && arg0!=0){
+                return getAds();
+            }
+            return wordlist.get(arg0);
         }
 
         @Override
@@ -149,11 +165,11 @@ public class Frag_Amharic extends Fragment {
 
             LayoutInflater inflate = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if(position==2){
-                return getAds();
-            }
+//            if(position%13==0 && position!=0){
+//                return getAds();
+//            }
 
-            else {
+
                 convertView = inflate.inflate(R.layout.single_layout_word, null);
 
                 if (position <= mCount) {
@@ -188,7 +204,7 @@ public class Frag_Amharic extends Fragment {
                     });
                 }
                 return convertView;
-            }
+
         }
 
         @Override

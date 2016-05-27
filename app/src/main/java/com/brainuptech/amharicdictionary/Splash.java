@@ -23,6 +23,7 @@ public class Splash extends AppCompatActivity {
     public static ArrayList<DictionaryEntitty> amharicwords;
     //public static ArrayList<DictionaryEntitty> englishwords;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +34,9 @@ public class Splash extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.splash);
-        final ProgressDialog myDialog = new ProgressDialog(this);
 
+
+        final ProgressDialog myDialog = new ProgressDialog(this);
         myDialog.setTitle(R.string.app_name);
         myDialog.setMessage("Loading.... \nPlease wait");
         myDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);

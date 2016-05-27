@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_english"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@android:drawable/ic_menu_more"
             android:title="English" />
         <item
             android:id="@+id/nav_amharic"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@android:drawable/ic_menu_more"
             android:title="Amharic" />
 
     </group>
@@ -21,7 +22,7 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@android:drawable/ic_dialog_info"
                 android:title="About" />
             <item
                 android:id="@+id/nav_exit"

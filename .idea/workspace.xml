@@ -20,29 +20,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v21/pic.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/pic.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v21/space_icon.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/space_icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v21/sym_keyboard_left.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v21/sym_keyboard_left.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/CustomKeyboard.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/CustomKeyboard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_Amharic.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_Amharic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_English.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_English.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Splash.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Splash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/about.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/adview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/adview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_more.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_more.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="AmharicDictionary.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,11 +52,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Frag_English.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ViewMoreAmharic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/ViewMoreAmharic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_more.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_more.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.62053573">
+              <caret line="121" column="46" selection-start-line="121" selection-start-column="46" selection-end-line="121" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Frag_English.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_English.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.025089607">
-              <caret line="448" column="4" selection-start-line="448" selection-start-column="4" selection-end-line="448" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="465" column="0" selection-start-line="465" selection-start-column="0" selection-end-line="465" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3058#3059#0" expanded="true" />
@@ -85,14 +90,14 @@
                 <element signature="e#3515#3516#0" expanded="true" />
                 <element signature="e#3577#3578#0" expanded="true" />
                 <element signature="e#3627#3628#0" expanded="true" />
-                <element signature="e#18716#18717#0" expanded="true" />
-                <element signature="e#18749#18750#0" expanded="true" />
-                <element signature="e#18783#18784#0" expanded="true" />
-                <element signature="e#18816#18817#0" expanded="true" />
-                <element signature="e#20845#20846#0" expanded="true" />
-                <element signature="e#20877#20878#0" expanded="true" />
-                <element signature="e#22396#22881#0" expanded="true" />
-                <element signature="e#22880#22881#0" expanded="true" />
+                <element signature="e#18713#18714#0" expanded="true" />
+                <element signature="e#18746#18747#0" expanded="true" />
+                <element signature="e#18780#18781#0" expanded="true" />
+                <element signature="e#18813#18814#0" expanded="true" />
+                <element signature="e#20842#20843#0" expanded="true" />
+                <element signature="e#20874#20875#0" expanded="true" />
+                <element signature="e#22393#22878#0" expanded="true" />
+                <element signature="e#22877#22878#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1990,7 +1995,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/ViewMoreEnglish.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/ViewMoreAmharic.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_english_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_more.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Splash.java" />
@@ -2003,6 +2007,7 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_Amharic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_English.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_more.xml" />
       </list>
     </option>
   </component>
@@ -2057,6 +2062,70 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AmharicDictionary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AmharicDictionary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AmharicDictionary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AmharicDictionary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amharicdictionary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2375,7 +2444,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2385,7 +2454,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4112628" sideWeight="0.33282444" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4761092" sideWeight="0.6671756" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2590,17 +2659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/ViewMoreAmharic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3361582">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#2862#2863#0" expanded="false" />
-            <element signature="e#2940#2941#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/LayoutInflater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -2681,24 +2739,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_more.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48161766">
-          <caret line="120" column="46" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/CustomKeyboard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43730888">
           <caret line="3808" column="42" selection-start-line="3808" selection-start-column="42" selection-end-line="3808" selection-end-column="42" />
           <folding>
-            <element signature="e#182150#182523#0" expanded="true" />
-            <element signature="e#182522#182523#0" expanded="true" />
+            <element signature="e#182150#182523#0" expanded="false" />
+            <element signature="e#182522#182523#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2841,8 +2888,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/Frag_English.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.025089607">
-          <caret line="448" column="4" selection-start-line="448" selection-start-column="4" selection-end-line="448" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="465" column="0" selection-start-line="465" selection-start-column="0" selection-end-line="465" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3058#3059#0" expanded="true" />
@@ -2853,15 +2900,34 @@
             <element signature="e#3515#3516#0" expanded="true" />
             <element signature="e#3577#3578#0" expanded="true" />
             <element signature="e#3627#3628#0" expanded="true" />
-            <element signature="e#18716#18717#0" expanded="true" />
-            <element signature="e#18749#18750#0" expanded="true" />
-            <element signature="e#18783#18784#0" expanded="true" />
-            <element signature="e#18816#18817#0" expanded="true" />
-            <element signature="e#20845#20846#0" expanded="true" />
-            <element signature="e#20877#20878#0" expanded="true" />
-            <element signature="e#22396#22881#0" expanded="true" />
-            <element signature="e#22880#22881#0" expanded="true" />
+            <element signature="e#18713#18714#0" expanded="true" />
+            <element signature="e#18746#18747#0" expanded="true" />
+            <element signature="e#18780#18781#0" expanded="true" />
+            <element signature="e#18813#18814#0" expanded="true" />
+            <element signature="e#20842#20843#0" expanded="true" />
+            <element signature="e#20874#20875#0" expanded="true" />
+            <element signature="e#22393#22878#0" expanded="true" />
+            <element signature="e#22877#22878#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainuptech/amharicdictionary/ViewMoreAmharic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_more.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62053573">
+          <caret line="121" column="46" selection-start-line="121" selection-start-column="46" selection-end-line="121" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

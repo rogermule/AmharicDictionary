@@ -446,7 +446,7 @@ public class Frag_English extends Fragment {
         return view;
     }
 
-    
+
     @Override
     public void onResume() {
         adView.resume();
@@ -458,6 +458,7 @@ public class Frag_English extends Fragment {
         adView.pause();
         super.onPause();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
